@@ -58,8 +58,8 @@ Homepage = "https://github.com/chopmob-cloud/algovoi-substrate-pqc"
 Repository = "https://github.com/chopmob-cloud/algovoi-substrate-pqc"
 "Source" = "https://github.com/chopmob-cloud/algovoi-substrate-pqc"
 "Issues" = "https://github.com/chopmob-cloud/algovoi-substrate-pqc/issues"
-"Cross-implementor reference (AP2 PQC)" = "https://github.com/chopmob-cloud/ap2-pq-conformance"
-"Canonicalisation discipline (IETF I-D)" = "https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/"
+"AP2 PQC fixture" = "https://github.com/chopmob-cloud/ap2-pq-conformance"
+"IETF I-D" = "https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/algovoi_substrate_pqc"]
