@@ -158,6 +158,41 @@ adds qualifying entries.
 v1 adopters retain their registry position. Adopting v2 adds a separate
 row pinned to `jcs-rfc8785-v2` rather than replacing the v1 row.
 
+## Acknowledgments
+
+The v2 discipline is solely AlgoVoi-authored. AlgoVoi acknowledges with
+thanks the post-quantum contribution and reference-implementation work that
+makes the cross-implementor convergence proof empirically possible:
+
+**Post-quantum contribution (v2-specific):**
+
+- **PQSafe** ([@rayc0](https://github.com/rayc0)) -- ML-DSA-65 (FIPS 204)
+  signature contribution over the AP2 PaymentMandate canonical bytes
+  ([chopmob-cloud/ap2-pq-conformance#1](https://github.com/chopmob-cloud/ap2-pq-conformance/pull/1),
+  merged 2026-05-26). **Credit is scoped to this ML-DSA-65 contribution only.**
+
+**Audit-grade PQC implementations cross-validated in the matrix:**
+
+- [PQClean](https://github.com/PQClean/PQClean) (via [`pqcrypto`](https://pypi.org/project/pqcrypto/)) -- PQClean community + Backbone Authors
+- [`@noble/post-quantum`](https://github.com/paulmillr/noble-post-quantum) -- Paul Miller
+- [Bouncy Castle](https://www.bouncycastle.org/) 1.84 (`MLDSASigner` for FIPS 204 final; experimental `FalconSigner`) -- Bouncy Castle community
+
+The three audit-grade PQC implementations agree byte-for-byte across the
+24-cell producer × verifier matrix. The substrate-author position rests on
+this independent multi-author cross-validation, not on AlgoVoi self-claim.
+
+**Classical primitives and JCS library wrapped:**
+
+- [`cryptography`](https://pypi.org/project/cryptography/) (Python) -- Python Cryptographic Authority
+- [`rfc8785`](https://pypi.org/project/rfc8785/) (Python) -- Anders Rundgren et al. (RFC 8785 reference implementation)
+- [`@noble/curves`](https://github.com/paulmillr/noble-curves) and [`@noble/hashes`](https://github.com/paulmillr/noble-hashes) (TypeScript) -- Paul Miller
+- [`canonicalize`](https://www.npmjs.com/package/canonicalize) (TypeScript) -- Samuel Erdtman
+
+**v1 validator and contributor acknowledgments** (the broader cross-impl
+validation matrix v2 builds on) are recorded at
+[docs.algovoi.co.uk/canonicalisation-substrate#acknowledgments-and-external-contributions](https://docs.algovoi.co.uk/canonicalisation-substrate#acknowledgments-and-external-contributions)
+and in the [`chopmob-cloud/algovoi-substrate`](https://github.com/chopmob-cloud/algovoi-substrate) README.
+
 ## Co-maintainer policy
 
 Contributors who land a substrate-aligned signature scheme (new family in the
