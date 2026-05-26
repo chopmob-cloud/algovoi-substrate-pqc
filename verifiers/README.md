@@ -39,6 +39,18 @@ against the same canonical anchor — see
 [`../_attestations/2026-05-26-cross-product-matrix.md`](../_attestations/2026-05-26-cross-product-matrix.md)
 for the full 4-producer × 6-verifier matrix.
 
+### Cross-implementor partner credit
+
+The ML-DSA-65 side of the byte-anchor convergence proof was contributed by
+**PQSafe ([@rayc0](https://github.com/rayc0))** per the AP2 #250 joint
+conformance fixture: [`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
+of [`chopmob-cloud/ap2-pq-conformance`](https://github.com/chopmob-cloud/ap2-pq-conformance).
+PQSafe is named co-maintainer of the joint conformance repo per the
+published policy. The substrate-author position rests on the joint nature
+of this deliverable — the convergence proof is meaningfully stronger
+because PQSafe is an independent counterparty signing over the same
+canonical bytes.
+
 These scripting-language verifiers extend the substrate-author position
 on the **canonicalisation + classical-signature** dimension. The full
 language matrix is documented in [`../docs/CROSS_RUNTIME.md`](../docs/CROSS_RUNTIME.md).

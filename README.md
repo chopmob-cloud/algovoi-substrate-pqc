@@ -45,6 +45,20 @@ Lyubashevsky, Pornin, Prest, Ricosset, Seiler, Whyte, and Zhang
 (Dilithium / CRYSTALS-Dilithium) is the work of Bai, Ducas, Kiltz, Lepoint,
 Lyubashevsky, Schwabe, Seiler, and Stehlé (standardised as NIST FIPS 204).
 
+## Cross-implementor partner
+
+**PQSafe ([@rayc0](https://github.com/rayc0))** is the cross-implementor
+partner on the ML-DSA-65 byte-anchor convergence proof per the
+[AP2 #250 joint conformance fixture](https://github.com/chopmob-cloud/ap2-pq-conformance).
+PQSafe contributed the
+[`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
+ML-DSA-65 signature over the identical canonical bytes that the AlgoVoi-side
+fixture signs (ES256 + Ed25519 + Falcon-1024). This package verifies both
+halves of that joint deliverable; PQSafe's contribution provides one of
+the two independent ML-DSA-65 implementation paths in the substrate-author
+cross-implementor proof. PQSafe is named co-maintainer of
+`chopmob-cloud/ap2-pq-conformance` per the published policy.
+
 ## Position relative to the substrate-author work
 
 This package sits **above** the audited PQC primitives and **alongside** the

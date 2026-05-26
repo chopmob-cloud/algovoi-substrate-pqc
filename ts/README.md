@@ -53,6 +53,21 @@ primitive is provided through the `@noble/post-quantum` MIT-licensed
 implementation. Any deployment using Falcon-1024 should review the FRAND
 pledge for their use case.
 
+## Cross-implementor partner
+
+**PQSafe ([@rayc0](https://github.com/rayc0))** is the cross-implementor
+partner on the ML-DSA-65 byte-anchor convergence proof per
+[AP2 #250](https://github.com/google-agentic-commerce/AP2/issues/250) and the
+joint conformance fixture at
+[`chopmob-cloud/ap2-pq-conformance`](https://github.com/chopmob-cloud/ap2-pq-conformance).
+PQSafe contributed the
+[`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
+ML-DSA-65 signature over the identical canonical bytes that the AlgoVoi-side
+fixture signs. This TypeScript package's cross-validation tests verify
+PQSafe's ML-DSA-65 signatures byte-for-byte alongside Python `pqcrypto`-
+produced signatures, demonstrating the substrate-author cross-implementor
+agreement.
+
 ## Cross-implementation interop
 
 The 26-test suite includes byte-for-byte cross-validation against the

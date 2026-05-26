@@ -64,12 +64,18 @@ This verifier confirms, byte-for-byte, that artefacts signed by:
 - TypeScript `@algovoi/substrate-pqc` (Paul Miller `@noble/post-quantum`)
 - Ruby producer (`verifiers/ruby/produce.rb`, OpenSSL stdlib)
 - PHP producer (`verifiers/php/produce.php`, openssl + sodium)
+- **PQSafe** ML-DSA-65 fixture from
+  [`chopmob-cloud/ap2-pq-conformance/pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
+  (per [AP2 #250](https://github.com/google-agentic-commerce/AP2/issues/250)
+  joint deliverable, contributed by [@rayc0](https://github.com/rayc0))
 
 …all verify under Bouncy Castle as an **independent third implementation**.
 
 The substrate-author cross-implementor PQC convergence proof now spans
 three audit-grade PQC implementations agreeing byte-for-byte against the
-same canonical anchor.
+same canonical anchor. PQSafe is the cross-implementor partner on the
+ML-DSA-65 side of that proof and named co-maintainer of the joint
+conformance repo per the published policy.
 
 ## License
 

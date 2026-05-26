@@ -322,6 +322,40 @@ def main() -> int:
 
     body += dedent(
         """\
+        ## Cross-implementor partners
+
+        This convergence proof is a coalition deliverable. Acknowledgements:
+
+        - **PQSafe ([@rayc0](https://github.com/rayc0))** — cross-implementor
+          partner on the ML-DSA-65 byte-anchor convergence per the AP2 #250
+          joint conformance fixture. PQSafe's ML-DSA-65 signatures (produced
+          with Python `pqcrypto`/PQClean) are verified by the TypeScript and
+          Java sides of this matrix, providing one of the two independent
+          ML-DSA-65 implementation paths in the cross-implementor proof.
+          Joint conformance home: [`chopmob-cloud/ap2-pq-conformance`](https://github.com/chopmob-cloud/ap2-pq-conformance);
+          PQSafe contributed the [`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
+          half of the joint fixture and is named co-maintainer per the
+          published policy.
+        - **Paul Miller ([@paulmillr](https://github.com/paulmillr))** —
+          `@noble/post-quantum` author, providing the second audit-grade PQC
+          implementation chain on the TypeScript side. Pure-JS Falcon-1024 +
+          ML-DSA-65 in MIT-licensed code.
+        - **PQClean community** — reference C implementations of Falcon-1024
+          and ML-DSA-65, exposed to Python via the
+          [`pqcrypto`](https://pypi.org/project/pqcrypto/) package (Backbone
+          Authors, Apache-2.0).
+        - **Bouncy Castle maintainers** — third audit-grade implementation
+          via `MLDSASigner` (production) and `FalconSigner` (experimental),
+          MIT-style licensed.
+        - **Anders Rundgren** — RFC 8785 JCS canonicalisation rule, the
+          load-bearing canonicalisation discipline this entire proof rests
+          on.
+
+        Without these upstream partners + cross-implementor contributors, the
+        matrix would not be reproducible. Substrate-author credit for the
+        convention + binding pattern + open-enum + fail-closed discipline is
+        AlgoVoi's; cross-implementor agreement is the coalition's.
+
         ## Substrate-author significance
 
         - **Four independent JCS canonicalisations** (Python `rfc8785`,
@@ -333,10 +367,13 @@ def main() -> int:
           artefact) demonstrates that signatures emitted in language X verify
           in language Y for the schemes available in each environment. The
           substrate convention is producer-verifier-symmetric.
-        - **Two audit-grade PQC implementation chains** (PQClean via `pqcrypto`
-          on Python; pure-JS `@noble/post-quantum` on TypeScript) produce
-          Falcon-1024 and ML-DSA-65 signatures over identical canonical bytes
-          that each verifier cross-confirms.
+        - **Three audit-grade PQC implementation chains** — PQClean via
+          `pqcrypto` on Python, pure-JS `@noble/post-quantum` on TypeScript,
+          and Bouncy Castle on Java — produce or verify Falcon-1024 and
+          ML-DSA-65 signatures over identical canonical bytes, with each
+          implementation independently confirming the others'. PQSafe's
+          ML-DSA-65 contribution (per AP2 #250) is the cross-implementor
+          fixture this triangle agrees on.
 
         ## Reproduce locally
 
