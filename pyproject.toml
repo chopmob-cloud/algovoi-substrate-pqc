@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "algovoi-substrate-pqc"
-version = "0.1.0"
+version = "0.1.1"
 description = "AlgoVoi substrate-author layer for JCS+PQC integration: signature_algorithm open-enum + cross-implementor byte-anchor convergence proof."
 readme = "README.md"
 license = { text = "Apache-2.0" }
