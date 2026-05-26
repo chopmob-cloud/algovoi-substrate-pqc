@@ -1,0 +1,94 @@
+{
+  "name": "@algovoi/substrate-pqc",
+  "version": "0.1.0",
+  "description": "AlgoVoi substrate-author layer for JCS+PQC integration: signature_algorithm open-enum + cross-implementor byte-anchor convergence proof. TypeScript companion to algovoi-substrate-pqc on PyPI.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "import": "./dist/registry.js",
+      "require": "./dist/registry.cjs"
+    },
+    "./canonical": {
+      "types": "./dist/canonical.d.ts",
+      "import": "./dist/canonical.js",
+      "require": "./dist/canonical.cjs"
+    },
+    "./sign": {
+      "types": "./dist/sign.d.ts",
+      "import": "./dist/sign.js",
+      "require": "./dist/sign.cjs"
+    },
+    "./verify": {
+      "types": "./dist/verify.d.ts",
+      "import": "./dist/verify.js",
+      "require": "./dist/verify.cjs"
+    },
+    "./proof": {
+      "types": "./dist/proof.d.ts",
+      "import": "./dist/proof.js",
+      "require": "./dist/proof.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@noble/curves": "^2.0.0",
+    "@noble/hashes": "^2.0.0",
+    "@noble/post-quantum": "^0.6.1",
+    "canonicalize": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "pqc",
+    "post-quantum",
+    "falcon",
+    "ml-dsa",
+    "dilithium",
+    "jcs",
+    "rfc8785",
+    "ap2",
+    "x402",
+    "agentic-payments",
+    "substrate",
+    "canonicalisation"
+  ],
+  "license": "Apache-2.0",
+  "author": "AlgoVoi (chopmob-cloud) <chopmob@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chopmob-cloud/algovoi-substrate-pqc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chopmob-cloud/algovoi-substrate-pqc/issues"
+  },
+  "homepage": "https://github.com/chopmob-cloud/algovoi-substrate-pqc"
+}
