@@ -63,9 +63,23 @@ proof methodology) is AlgoVoi's.**
 ## Position relative to the substrate-author work
 
 This package sits **above** the audited PQC primitives and **alongside** the
-[AlgoVoi canonicalisation discipline](https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/)
-(`urn:x402:canonicalisation:jcs-rfc8785-v1`, AlgoVoi-authored IETF
-Independent Submission, Informational).
+AlgoVoi-authored canonicalisation discipline. It emits receipts under
+[`urn:x402:canonicalisation:jcs-rfc8785-v2`](https://docs.algovoi.co.uk/canonicalisation-substrate-v2)
+(PQC-aware), the strictly-additive successor to
+[`urn:x402:canonicalisation:jcs-rfc8785-v1`](https://docs.algovoi.co.uk/canonicalisation-substrate).
+The canonicalisation core (RFC 8785 JCS plus schema-normalisation rules) is
+unchanged between v1 and v2; v2 adds the `signature_algorithm` open-enum
+registry and the fail-closed verifier discipline this package implements.
+
+> **IETF Internet-Draft status.** An IETF Internet-Draft formalising
+> `urn:x402:canonicalisation:jcs-rfc8785-v2` under the Independent Submissions
+> stream is **pending** an active IETF list thread (May 2026) on the
+> appropriate scope and use of the Independent Submissions stream for
+> x402-related substrate documentation. The v2 discipline is published on
+> `docs.algovoi.co.uk/canonicalisation-substrate-v2`, in this reference
+> implementation, and in the
+> [Substrate Adopters Registry](https://docs.algovoi.co.uk/adopters)
+> independently of that process.
 
 | Layer | Owner | Artefact |
 |---|---|---|
@@ -73,8 +87,9 @@ Independent Submission, Informational).
 | L1 — PQC reference C implementations | PQClean | `PQClean/PQClean` repo |
 | L2 — Python wrapper around PQClean | Backbone Authors | `pqcrypto` PyPI package |
 | L3 — Classical primitives + JCS rule | Python Cryptographic Authority + Anders Rundgren | `cryptography`, `rfc8785` PyPI packages |
-| **L4 — Canonicalisation discipline** | **AlgoVoi** | `urn:x402:canonicalisation:jcs-rfc8785-v1`, IETF I-D |
-| **L4 — `signature_algorithm` open-enum + binding pattern** | **AlgoVoi** | This package |
+| **L4 — Canonicalisation discipline v1** | **AlgoVoi** | `urn:x402:canonicalisation:jcs-rfc8785-v1`, AlgoVoi-authored, IETF Independent Submission Informational |
+| **L4 — Canonicalisation discipline v2 (PQC-aware)** | **AlgoVoi** | `urn:x402:canonicalisation:jcs-rfc8785-v2`, AlgoVoi-authored, IETF I-D filing pending the active IETF list thread on Independent Submissions stream scope |
+| **L4 — `signature_algorithm` open-enum + binding pattern** | **AlgoVoi** | This package (codifies v2 normatively) |
 
 AlgoVoi's substrate-author contribution is **the convention, the binding, and
 the proof methodology**, not the primitives.
@@ -121,7 +136,8 @@ dependencies (`pqcrypto`, `cryptography`, `rfc8785`).
 - Author: AlgoVoi (chopmob-cloud) — chopmob@gmail.com
 - Source: https://github.com/chopmob-cloud/algovoi-substrate-pqc
 - Cross-implementor reference fixture: https://github.com/chopmob-cloud/ap2-pq-conformance
-- Canonicalisation discipline (IETF I-D): https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/
+- Canonicalisation discipline v1: https://docs.algovoi.co.uk/canonicalisation-substrate (also at IETF datatracker as draft-hopley-x402-canonicalisation-jcs-v1)
+- Canonicalisation discipline v2 (PQC-aware): https://docs.algovoi.co.uk/canonicalisation-substrate-v2 (IETF I-D filing pending IETF list thread on Independent Submissions stream scope)
 
 ## Co-maintainer policy
 
