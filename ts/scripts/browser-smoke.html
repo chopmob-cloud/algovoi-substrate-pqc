@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@algovoi/substrate-pqc — browser smoke test</title>
+    <style>
+      body {
+        font-family: ui-monospace, SFMono-Regular, monospace;
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      .pass { color: #0a7d32; }
+      .fail { color: #c22; font-weight: bold; }
+      .skip { color: #888; }
+      pre { background: #f4f4f4; padding: 1rem; border-radius: 4px; overflow: auto; }
+      .summary { font-size: 1.2rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ccc; }
+    </style>
+  </head>
+  <body>
+    <h1>@algovoi/substrate-pqc — browser smoke test</h1>
+    <p>
+      Pure-JS browser-runtime verification of the AlgoVoi-substrate JCS+PQC integration
+      package, served from the local <code>dist/</code> directory. Mirrors the
+      <code>scripts/runtime-smoke.mjs</code> Node/Bun/Deno smoke test.
+    </p>
+    <p>
+      <strong>Serve this file locally:</strong>
+      <code>cd ts &amp;&amp; npx http-server -c-1 -p 8080</code>, then open
+      <code>http://localhost:8080/scripts/browser-smoke.html</code>.
+    </p>
+    <h2>Output</h2>
+    <pre id="out">running…</pre>
+    <div id="summary" class="summary"></div>
+    <script type="module">
+      const out = document.getElementById('out');
+      const summary = document.getElementById('summary');
+      const log = (cls, msg) => {
+        const span = document.createElement('span');
+        if (cls) span.className = cls;
+        span.textContent = msg + '\n';
+        out.appendChild(span);
+      };
+      let pass = 0;
+      let fail = 0;
+      const fails = [];
+      const check = (name, ok, detail = '') => {
+        if (ok) {
+          pass++;
+          log('pass', `PASS  ${name}`);
+        } else {
+          fail++;
+          fails.push(`${name}${detail ? ': ' + detail : ''}`);
+          log('fail', `FAIL  ${name}${detail ? ' — ' + detail : ''}`);
+        }
+      };
+      try {
+        out.textContent = '';
+        const mod = await import('../dist/algovoi-substrate-pqc.browser.js');
+        log(null, `Runtime: ${navigator.userAgent}`);
+        log(null, '');
+
+        log(null, '1. signature_algorithm registry:');
+        check('registry size = 12', mod.KNOWN_SIGNATURE_ALGORITHMS.size === 12);
+        check(
+          'lookup("Falcon-1024") returns NIST L5',
+          mod.lookupSignatureAlgorithm('Falcon-1024').notes.includes('Level 5'),
+        );
+        try {
+          mod.lookupSignatureAlgorithm('NotReal');
+          check('unknown identifier throws', false);
+        } catch (e) {
+          check('unknown identifier throws', e instanceof mod.UnknownSignatureAlgorithmError);
+        }
+
+        log(null, '\n2. JCS canonical bytes anchor:');
+        const ap2Payload = {
+          amount: { currency: 'USD', minor_units: 4995 },
+          constraints: [
+            { type: 'merchant_id_allowlist', value: ['did:web:merchant.example.com'] },
+            { type: 'expiry_unix_ms', value: 1782259200000 },
+          ],
+          issued_at: '2026-05-21T00:00:00Z',
+          issued_at_ms: 1779667200000,
+          issuer: 'did:web:wallet.example.org',
+          merchant: 'did:web:merchant.example.com',
+          nonce: '0x7b5ce8a4f1b9a4d2',
+          schema: 'google-agentic-commerce/AP2 PaymentMandate',
+          subject: 'did:web:agent.example.org#agent-7',
+          vct: 'mandate.payment.1',
+          version: '0.1',
+        };
+        const expected =
+          'sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0';
+        const got = mod.jcsCanonicalSha256Hex(ap2Payload);
+        check('AP2 PaymentMandate canonical SHA matches published anchor', got === expected, `got ${got}`);
+
+        log(null, '\n3. 4-scheme round-trip + convergence artefact:');
+        const es = mod.generateES256SecretKey();
+        const ed = mod.generateEd25519SecretKey();
+        const fk = mod.generateFalcon1024Keypair();
+        const mk = mod.generateMLDSA65Keypair();
+
+        const signatures = {
+          ES256: mod.signES256(ap2Payload, es),
+          Ed25519: mod.signEd25519(ap2Payload, ed),
+          'Falcon-1024': mod.signFalcon1024(ap2Payload, fk.secretKey, fk.publicKey),
+          'ML-DSA-65': mod.signMLDSA65(ap2Payload, mk.secretKey, mk.publicKey),
+        };
+        const artefact = mod.buildConvergenceArtefact(ap2Payload, signatures, {
+          artefactId: 'browser-smoke-v0',
+        });
+        const v = mod.verifyArtefact(artefact);
+        check('canonical SHA matches', v.canonicalShaOk);
+        check(
+          'all 4 signatures verify in browser',
+          v.signatures.length === 4 && v.signatures.every((s) => s.ok),
+          v.signatures.filter((s) => !s.ok).map((s) => `${s.algorithm}:${s.detail}`).join(' '),
+        );
+
+        log(null, '\n4. AP2 conformance fixtures: fetch via HTTP (optional)');
+        try {
+          const r = await fetch(
+            '../../ap2-pq-conformance/algovoi-side/ap2-pqc-v0-algovoi-side.json',
+          );
+          if (r.ok) {
+            const fixture = await r.json();
+            const fv = mod.verifyArtefact(fixture);
+            check('AlgoVoi-side fixture canonical SHA matches', fv.canonicalShaOk);
+            for (const s of fv.signatures) {
+              check(`AlgoVoi-side ${s.algorithm} verifies in browser`, s.ok, s.detail);
+            }
+          } else {
+            log('skip', `  SKIP  AP2 fixture not reachable at ../../ap2-pq-conformance/… (HTTP ${r.status})`);
+          }
+        } catch (e) {
+          log('skip', `  SKIP  AP2 fixture fetch error: ${e.message}`);
+        }
+
+        summary.className = `summary ${fail === 0 ? 'pass' : 'fail'}`;
+        summary.textContent = `Passed: ${pass} · Failed: ${fail}`;
+        if (fail > 0) {
+          const ul = document.createElement('ul');
+          fails.forEach((f) => {
+            const li = document.createElement('li');
+            li.textContent = f;
+            ul.appendChild(li);
+          });
+          summary.appendChild(ul);
+        }
+      } catch (e) {
+        out.textContent = '';
+        log('fail', `module load error: ${e.message}`);
+        summary.className = 'summary fail';
+        summary.textContent = `Failed to load module: ${e.message}`;
+      }
+    </script>
+  </body>
+</html>
