@@ -1,0 +1,86 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "algovoi-substrate-pqc"
+version = "0.1.0"
+description = "AlgoVoi substrate-author layer for JCS+PQC integration: signature_algorithm open-enum + cross-implementor byte-anchor convergence proof."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+authors = [
+    { name = "AlgoVoi (chopmob-cloud)", email = "chopmob@gmail.com" },
+]
+keywords = [
+    "pqc",
+    "post-quantum",
+    "falcon",
+    "ml-dsa",
+    "dilithium",
+    "jcs",
+    "rfc8785",
+    "ap2",
+    "x402",
+    "agentic-payments",
+    "substrate",
+    "canonicalisation",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security :: Cryptography",
+]
+
+dependencies = [
+    "rfc8785>=0.1.4,<0.2",
+    "cryptography>=42",
+    "pqcrypto>=0.4.0,<0.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/chopmob-cloud/algovoi-substrate-pqc"
+Repository = "https://github.com/chopmob-cloud/algovoi-substrate-pqc"
+"Source" = "https://github.com/chopmob-cloud/algovoi-substrate-pqc"
+"Issues" = "https://github.com/chopmob-cloud/algovoi-substrate-pqc/issues"
+"Cross-implementor reference (AP2 PQC)" = "https://github.com/chopmob-cloud/ap2-pq-conformance"
+"Canonicalisation discipline (IETF I-D)" = "https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/algovoi_substrate_pqc"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/docs",
+    "/README.md",
+    "/LICENSE",
+    "/pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N"]

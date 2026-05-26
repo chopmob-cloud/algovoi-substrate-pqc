@@ -1,0 +1,42 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+*.egg
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+
+# Node / TS
+node_modules/
+ts/dist/
+ts/build/
+ts/.tsbuildinfo
+ts/coverage/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit
+*.key
+*.pem
+keys.txt
+.env
+.env.local
