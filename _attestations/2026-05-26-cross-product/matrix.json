@@ -1,0 +1,202 @@
+{
+  "attestation_id": "algovoi-substrate-pqc-cross-product-2026-05-26",
+  "generated_at": "2026-05-26T07:11:02Z",
+  "byte_anchor_consensus": {
+    "all_producers_agree": true,
+    "consensus_sha256": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+    "per_producer_sha256": {
+      "python": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+      "ts": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+      "ruby": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+      "php": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0"
+    }
+  },
+  "producers": {
+    "python": {
+      "ok": true,
+      "output_tail": "wrote C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\python.json (signatures: ['ES256', 'Ed25519', 'Falcon-1024', 'ML-DSA-65'])",
+      "canonical_sha256": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+      "signature_schemes": [
+        "ES256",
+        "Ed25519",
+        "Falcon-1024",
+        "ML-DSA-65"
+      ]
+    },
+    "ts": {
+      "ok": true,
+      "output_tail": "wrote C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ts.json (signatures: ES256, Ed25519, Falcon-1024, ML-DSA-65)",
+      "canonical_sha256": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+      "signature_schemes": [
+        "ES256",
+        "Ed25519",
+        "Falcon-1024",
+        "ML-DSA-65"
+      ]
+    },
+    "ruby": {
+      "ok": true,
+      "output_tail": "wrote C:/algo/algovoi-substrate-pqc/_attestations/2026-05-26-cross-product/producers/ruby.json (signatures: ES256, Ed25519)",
+      "canonical_sha256": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+      "signature_schemes": [
+        "ES256",
+        "Ed25519"
+      ]
+    },
+    "php": {
+      "ok": true,
+      "output_tail": "wrote C:\\algo\\algovoi-substrate-pqc/_attestations/2026-05-26-cross-product/producers/php.json (signatures: ES256, Ed25519)",
+      "canonical_sha256": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+      "signature_schemes": [
+        "ES256",
+        "Ed25519"
+      ]
+    }
+  },
+  "matrix": {
+    "python": {
+      "python": {
+        "ok": true,
+        "summary": "5/5",
+        "output_tail": "canonical_sha_ok=True\nES256: OK\nEd25519: OK\nFalcon-1024: OK\nML-DSA-65: OK"
+      },
+      "ts": {
+        "ok": true,
+        "summary": "5/5",
+        "output_tail": "canonical_sha_ok=true\nES256: OK\nEd25519: OK\nFalcon-1024: OK\nML-DSA-65: OK"
+      },
+      "ruby": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Ruby verifier ===\nRuntime: ruby 3.4.9\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\python.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for Ruby (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for Ruby (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: ruby 3.4.9\nPassed:  4\nFailed:  0"
+      },
+      "php": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\python.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
+      },
+      "perl": {
+        "ok": true,
+        "summary": "JCS 2/2",
+        "output_tail": "=== algovoi-substrate-pqc - Perl verifier ===\nRuntime: perl 5.038002\nCryptX:  NOT installed - ES256+Ed25519 will be SKIPped (cpanm CryptX)\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\python.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable ES256 verification\n\n3. Ed25519:\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable Ed25519 verification\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for Perl (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for Perl (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: perl 5.038002\nPassed:  2\nFailed:  0"
+      }
+    },
+    "ts": {
+      "python": {
+        "ok": true,
+        "summary": "5/5",
+        "output_tail": "canonical_sha_ok=True\nES256: OK\nEd25519: OK\nFalcon-1024: OK\nML-DSA-65: OK"
+      },
+      "ts": {
+        "ok": true,
+        "summary": "5/5",
+        "output_tail": "canonical_sha_ok=true\nES256: OK\nEd25519: OK\nFalcon-1024: OK\nML-DSA-65: OK"
+      },
+      "ruby": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Ruby verifier ===\nRuntime: ruby 3.4.9\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ts.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for Ruby (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for Ruby (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: ruby 3.4.9\nPassed:  4\nFailed:  0"
+      },
+      "php": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ts.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
+      },
+      "perl": {
+        "ok": true,
+        "summary": "JCS 2/2",
+        "output_tail": "=== algovoi-substrate-pqc - Perl verifier ===\nRuntime: perl 5.038002\nCryptX:  NOT installed - ES256+Ed25519 will be SKIPped (cpanm CryptX)\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ts.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable ES256 verification\n\n3. Ed25519:\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable Ed25519 verification\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for Perl (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for Perl (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: perl 5.038002\nPassed:  2\nFailed:  0"
+      }
+    },
+    "ruby": {
+      "python": {
+        "ok": true,
+        "summary": "3/3",
+        "output_tail": "canonical_sha_ok=True\nES256: OK\nEd25519: OK"
+      },
+      "ts": {
+        "ok": true,
+        "summary": "3/3",
+        "output_tail": "canonical_sha_ok=true\nES256: OK\nEd25519: OK"
+      },
+      "ruby": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Ruby verifier ===\nRuntime: ruby 3.4.9\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ruby.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: ruby 3.4.9\nPassed:  4\nFailed:  0"
+      },
+      "php": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ruby.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
+      },
+      "perl": {
+        "ok": true,
+        "summary": "JCS 2/2",
+        "output_tail": "=== algovoi-substrate-pqc - Perl verifier ===\nRuntime: perl 5.038002\nCryptX:  NOT installed - ES256+Ed25519 will be SKIPped (cpanm CryptX)\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ruby.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable ES256 verification\n\n3. Ed25519:\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable Ed25519 verification\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: perl 5.038002\nPassed:  2\nFailed:  0"
+      }
+    },
+    "php": {
+      "python": {
+        "ok": true,
+        "summary": "3/3",
+        "output_tail": "canonical_sha_ok=True\nES256: OK\nEd25519: OK"
+      },
+      "ts": {
+        "ok": true,
+        "summary": "3/3",
+        "output_tail": "canonical_sha_ok=true\nES256: OK\nEd25519: OK"
+      },
+      "ruby": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Ruby verifier ===\nRuntime: ruby 3.4.9\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\php.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: ruby 3.4.9\nPassed:  4\nFailed:  0"
+      },
+      "php": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\php.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
+      },
+      "perl": {
+        "ok": true,
+        "summary": "JCS 2/2",
+        "output_tail": "=== algovoi-substrate-pqc - Perl verifier ===\nRuntime: perl 5.038002\nCryptX:  NOT installed - ES256+Ed25519 will be SKIPped (cpanm CryptX)\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\php.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable ES256 verification\n\n3. Ed25519:\n  SKIP  CryptX not installed; install with `cpanm CryptX` to enable Ed25519 verification\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: perl 5.038002\nPassed:  2\nFailed:  0"
+      }
+    }
+  },
+  "verifiers": [
+    "python",
+    "ts",
+    "ruby",
+    "php",
+    "perl"
+  ],
+  "scope": {
+    "schemes_with_full_pqc": [
+      "ES256",
+      "Ed25519",
+      "Falcon-1024",
+      "ML-DSA-65"
+    ],
+    "schemes_classical_only": [
+      "ES256",
+      "Ed25519"
+    ],
+    "pqc_producers": [
+      "python",
+      "ts"
+    ],
+    "classical_producers": [
+      "python",
+      "ts",
+      "ruby",
+      "php"
+    ],
+    "all_verifiers": [
+      "python",
+      "ts",
+      "ruby",
+      "php",
+      "perl"
+    ]
+  }
+}

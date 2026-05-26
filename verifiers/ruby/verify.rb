@@ -143,14 +143,53 @@ puts
 puts '2. ES256 (P-256 + SHA-256):'
 es = artefact.dig('signatures', 'ES256')
 if es
-  pub_der = Base64.decode64(es.fetch('publicKeyDer'))
-  sig_der = Base64.decode64(es.fetch('signature_der'))
-  pubkey = OpenSSL::PKey::EC.new(pub_der)
-  digest = OpenSSL::Digest.new('SHA256')
-  ok = pubkey.verify(digest, sig_der, canonical)
-  got, gone = check('ES256 verifies against AlgoVoi-side fixture', ok)
-  pass += got; fail += gone
-  fails << 'ES256' if gone == 1
+  # Accept either DER-encoded SubjectPublicKeyInfo (publicKeyDer) OR raw
+  # uncompressed 65-byte point (publicKey_b64). Substrate-author convention.
+  pubkey =
+    if es['publicKeyDer']
+      OpenSSL::PKey::EC.new(Base64.decode64(es['publicKeyDer']))
+    elsif es['publicKey_b64']
+      raw = Base64.decode64(es['publicKey_b64'])
+      # OpenSSL 3.0 PKeys are immutable; wrap raw uncompressed point as DER
+      # SubjectPublicKeyInfo for P-256 (the algorithm-identifier prefix is
+      # fixed for prime256v1), then load via OpenSSL::PKey::EC.new.
+      raise 'expected 65-byte uncompressed P-256 point' if raw.bytesize != 65 || raw[0] != "\x04"
+      der_prefix = ["3059301306072a8648ce3d020106082a8648ce3d0301070342"].pack('H*')
+      der        = der_prefix + "\x00" + raw  # BIT STRING unused-bits byte + raw point
+      OpenSSL::PKey::EC.new(der)
+    else
+      nil
+    end
+
+  # Accept either DER signature (signature_der) or 64-byte compact (r||s).
+  sig_bytes =
+    if es['signature_der']
+      Base64.decode64(es['signature_der'])
+    elsif (compact_b64 = es['signature_b64'] || es['signature_compact_b64'])
+      compact = Base64.decode64(compact_b64)
+      if compact.bytesize == 64
+        r = OpenSSL::BN.new(compact[0, 32].unpack1('H*'), 16)
+        s = OpenSSL::BN.new(compact[32, 32].unpack1('H*'), 16)
+        # Re-encode as ASN.1 DER SEQUENCE { r, s }.
+        OpenSSL::ASN1::Sequence.new([
+          OpenSSL::ASN1::Integer.new(r),
+          OpenSSL::ASN1::Integer.new(s)
+        ]).to_der
+      else
+        compact
+      end
+    end
+
+  if pubkey && sig_bytes
+    digest = OpenSSL::Digest.new('SHA256')
+    ok = pubkey.verify(digest, sig_bytes, canonical)
+    got, gone = check('ES256 verifies against fixture', ok)
+    pass += got; fail += gone
+    fails << 'ES256' if gone == 1
+  else
+    got, gone = check('ES256 verifies', false, 'missing publicKey* or signature_*')
+    pass += got; fail += gone
+  end
 else
   puts '  SKIP  ES256 not present in fixture'
 end

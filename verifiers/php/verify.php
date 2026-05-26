@@ -145,17 +145,64 @@ $pass += $got; $fail += $gone;
 echo "\n2. ES256 (P-256 + SHA-256):\n";
 $es = $artefact['signatures']['ES256'] ?? null;
 if ($es) {
-    $pubDer  = base64_decode($es['publicKeyDer']);
-    $sigDer  = base64_decode($es['signature_der']);
-    $pemHead = "-----BEGIN PUBLIC KEY-----\n" . chunk_split(base64_encode($pubDer), 64, "\n")
-             . "-----END PUBLIC KEY-----\n";
-    $pubkey  = openssl_pkey_get_public($pemHead);
-    if ($pubkey === false) {
-        [$got, $gone] = check('ES256 verifies', false, 'openssl_pkey_get_public failed');
+    // Public key: accept publicKeyDer (DER SubjectPublicKeyInfo) OR
+    // publicKey_b64 (raw 65-byte uncompressed point).
+    $pubDer = null;
+    if (!empty($es['publicKeyDer'])) {
+        $pubDer = base64_decode($es['publicKeyDer']);
+    } elseif (!empty($es['publicKey_b64'])) {
+        $raw = base64_decode($es['publicKey_b64']);
+        if (strlen($raw) === 65 && ord($raw[0]) === 0x04) {
+            // Wrap raw uncompressed point in DER SubjectPublicKeyInfo for P-256.
+            // Fixed header: 30 59 30 13 06 07 2a8648ce3d0201 06 08 2a8648ce3d030107 03 42 00
+            $pubDer = hex2bin(
+                '3059301306072a8648ce3d020106082a8648ce3d03010703420000'
+            );
+            // Replace the trailing 00 with the actual 65-byte point. The hex
+            // above is 26 bytes (=0x1a) header + a placeholder; build properly:
+            $hdr = hex2bin(
+                '3059301306072a8648ce3d020106082a8648ce3d03010703420000'
+            );
+            // The trailing "00" is the BIT STRING unused-bits byte; the next
+            // 65 bytes are the raw point.
+            $pubDer = substr($hdr, 0, -1) . $raw;
+        }
+    }
+
+    // Signature: accept signature_der OR signature_b64/signature_compact_b64.
+    $sigDer = null;
+    if (!empty($es['signature_der'])) {
+        $sigDer = base64_decode($es['signature_der']);
+    } elseif (!empty($es['signature_b64']) || !empty($es['signature_compact_b64'])) {
+        $compact = base64_decode($es['signature_b64'] ?? $es['signature_compact_b64']);
+        if (strlen($compact) === 64) {
+            // Encode r || s as ASN.1 DER SEQUENCE { INTEGER, INTEGER }.
+            $r       = ltrim(substr($compact, 0, 32), "\x00") ?: "\x00";
+            $s       = ltrim(substr($compact, 32, 32), "\x00") ?: "\x00";
+            if (ord($r[0]) & 0x80) $r = "\x00" . $r;
+            if (ord($s[0]) & 0x80) $s = "\x00" . $s;
+            $rEnc    = chr(0x02) . chr(strlen($r)) . $r;
+            $sEnc    = chr(0x02) . chr(strlen($s)) . $s;
+            $seq     = $rEnc . $sEnc;
+            $sigDer  = chr(0x30) . chr(strlen($seq)) . $seq;
+        } else {
+            $sigDer = $compact;
+        }
+    }
+
+    if ($pubDer === null || $sigDer === null) {
+        [$got, $gone] = check('ES256 verifies', false, 'missing publicKey* or signature_*');
     } else {
-        $ok           = openssl_verify($canonical, $sigDer, $pubkey, OPENSSL_ALGO_SHA256);
-        [$got, $gone] = check('ES256 verifies against AlgoVoi-side fixture', $ok === 1,
-                              $ok === 0 ? 'signature did not verify' : 'openssl error');
+        $pemHead = "-----BEGIN PUBLIC KEY-----\n" . chunk_split(base64_encode($pubDer), 64, "\n")
+                 . "-----END PUBLIC KEY-----\n";
+        $pubkey  = openssl_pkey_get_public($pemHead);
+        if ($pubkey === false) {
+            [$got, $gone] = check('ES256 verifies', false, 'openssl_pkey_get_public failed');
+        } else {
+            $ok           = openssl_verify($canonical, $sigDer, $pubkey, OPENSSL_ALGO_SHA256);
+            [$got, $gone] = check('ES256 verifies against fixture', $ok === 1,
+                                  $ok === 0 ? 'signature did not verify' : 'openssl error');
+        }
     }
     $pass += $got; $fail += $gone;
     if ($gone) $fails[] = 'ES256';

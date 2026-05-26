@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "artefact_id": "cross-product-v0-ruby-side",
+  "canonicalizer": "ruby-minimal-jcs/3.x",
+  "published_at": "2026-05-26T07:10:55Z",
+  "anchored_to": {
+    "thread": "https://github.com/chopmob-cloud/algovoi-substrate-pqc",
+    "schema": "AP2 PaymentMandate v0.1 (cross-product exemplar)",
+    "rfc": "RFC 8785 (JCS)"
+  },
+  "context": {
+    "producer": "ruby/openssl-stdlib",
+    "producer_runtime": "ruby/3.4.9",
+    "purpose": "Ruby-side producer for the cross-product matrix; signs the stable canonical payload under ES256 + Ed25519 only. PQC schemes are out of scope for Ruby (no audit-grade library)."
+  },
+  "mandate_body": {
+    "amount": {
+      "currency": "USD",
+      "minor_units": 4995
+    },
+    "constraints": [
+      {
+        "type": "merchant_id_allowlist",
+        "value": [
+          "did:web:merchant.example.com"
+        ]
+      },
+      {
+        "type": "expiry_unix_ms",
+        "value": 1782259200000
+      }
+    ],
+    "issued_at": "2026-05-21T00:00:00Z",
+    "issued_at_ms": 1779667200000,
+    "issuer": "did:web:wallet.example.org",
+    "merchant": "did:web:merchant.example.com",
+    "nonce": "0x7b5ce8a4f1b9a4d2",
+    "schema": "google-agentic-commerce/AP2 PaymentMandate",
+    "subject": "did:web:agent.example.org#agent-7",
+    "vct": "mandate.payment.1",
+    "version": "0.1"
+  },
+  "expected_jcs_bytes_b64": "eyJhbW91bnQiOnsiY3VycmVuY3kiOiJVU0QiLCJtaW5vcl91bml0cyI6NDk5NX0sImNvbnN0cmFpbnRzIjpbeyJ0eXBlIjoibWVyY2hhbnRfaWRfYWxsb3dsaXN0IiwidmFsdWUiOlsiZGlkOndlYjptZXJjaGFudC5leGFtcGxlLmNvbSJdfSx7InR5cGUiOiJleHBpcnlfdW5peF9tcyIsInZhbHVlIjoxNzgyMjU5MjAwMDAwfV0sImlzc3VlZF9hdCI6IjIwMjYtMDUtMjFUMDA6MDA6MDBaIiwiaXNzdWVkX2F0X21zIjoxNzc5NjY3MjAwMDAwLCJpc3N1ZXIiOiJkaWQ6d2ViOndhbGxldC5leGFtcGxlLm9yZyIsIm1lcmNoYW50IjoiZGlkOndlYjptZXJjaGFudC5leGFtcGxlLmNvbSIsIm5vbmNlIjoiMHg3YjVjZThhNGYxYjlhNGQyIiwic2NoZW1hIjoiZ29vZ2xlLWFnZW50aWMtY29tbWVyY2UvQVAyIFBheW1lbnRNYW5kYXRlIiwic3ViamVjdCI6ImRpZDp3ZWI6YWdlbnQuZXhhbXBsZS5vcmcjYWdlbnQtNyIsInZjdCI6Im1hbmRhdGUucGF5bWVudC4xIiwidmVyc2lvbiI6IjAuMSJ9",
+  "expected_jcs_bytes_hex": "7b22616d6f756e74223a7b2263757272656e6379223a22555344222c226d696e6f725f756e697473223a343939357d2c22636f6e73747261696e7473223a5b7b2274797065223a226d65726368616e745f69645f616c6c6f776c697374222c2276616c7565223a5b226469643a7765623a6d65726368616e742e6578616d706c652e636f6d225d7d2c7b2274797065223a226578706972795f756e69785f6d73222c2276616c7565223a313738323235393230303030307d5d2c226973737565645f6174223a22323032362d30352d32315430303a30303a30305a222c226973737565645f61745f6d73223a313737393636373230303030302c22697373756572223a226469643a7765623a77616c6c65742e6578616d706c652e6f7267222c226d65726368616e74223a226469643a7765623a6d65726368616e742e6578616d706c652e636f6d222c226e6f6e6365223a22307837623563653861346631623961346432222c22736368656d61223a22676f6f676c652d6167656e7469632d636f6d6d657263652f415032205061796d656e744d616e64617465222c227375626a656374223a226469643a7765623a6167656e742e6578616d706c652e6f7267236167656e742d37222c22766374223a226d616e646174652e7061796d656e742e31222c2276657273696f6e223a22302e31227d",
+  "expected_jcs_bytes_length": 501,
+  "expected_canonical_sha256": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
+  "signatures": {
+    "ES256": {
+      "algorithm": "ES256",
+      "curve": "P-256",
+      "hash": "SHA-256",
+      "publicKeyDer": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEp/cuEaGylX+YptANj7wvB5W/jP86t4ILFTx4qhhlxNHTutzr8SQP2QOdpq1e4/ODR1I/gYQqqq3itDFSDiKr9Q==",
+      "signature_der": "MEYCIQC7ibh3lK5cLAyIeX0iOMyOoyYVkx0RKcfXk3vlujNAbwIhAJXxit0ZgUnNmksuml8bk1iF8vtqTmpEJQVl22kWNUqT"
+    },
+    "Ed25519": {
+      "algorithm": "Ed25519",
+      "publicKey_b64": "FrayNxSfr2XoPOKg5ua04c5yvfY4r9ZdlMf5DHAqfkc=",
+      "signature_b64": "fuDGVtY87LjMPRRiOGK4Xgq9CWtWTCoFXOPOZ2nI+LRP5MPFqLZLpwpOpPbwJAuad20u36epJ0qqpD2Z/DxLCQ=="
+    }
+  }
+}

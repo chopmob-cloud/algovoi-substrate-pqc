@@ -67,11 +67,59 @@ class ArtefactVerifyResult:
         return self.canonical_sha_ok and all(s.ok for s in self.signatures)
 
 
+def _load_p256_public_key(sig: dict[str, Any]):
+    """Load a P-256 public key from either DER (publicKeyDer) or raw
+    uncompressed-point form (publicKey_b64 → 65-byte 0x04|X|Y).
+
+    AP2 PQ v0 fixtures historically use DER (from Python cryptography); the
+    TypeScript producer emits raw uncompressed bytes. The substrate-author
+    convention accepts both.
+    """
+    if isinstance(sig.get("publicKeyDer"), str):
+        return serialization.load_der_public_key(_b64d(sig["publicKeyDer"]))
+    if isinstance(sig.get("publicKey_b64"), str):
+        raw = _b64d(sig["publicKey_b64"])
+        return ec.EllipticCurvePublicKey.from_encoded_point(ec.SECP256R1(), raw)
+    raise KeyError("ES256 signature missing publicKey_b64 / publicKeyDer")
+
+
+def _ecdsa_signature_bytes(sig: dict[str, Any]) -> tuple[bytes, str]:
+    """Return (signature_bytes, format) — format is 'der' or 'compact-64'."""
+    if isinstance(sig.get("signature_der"), str):
+        return _b64d(sig["signature_der"]), "der"
+    for key in ("signature_b64", "signature_compact_b64"):
+        if isinstance(sig.get(key), str):
+            return _b64d(sig[key]), "compact-64"
+    raise KeyError("ES256 signature missing signature_b64 / signature_compact_b64 / signature_der")
+
+
+def _compact_to_der_ecdsa(compact: bytes) -> bytes:
+    """Convert 64-byte r||s compact ECDSA signature to ASN.1 DER form."""
+    if len(compact) != 64:
+        raise ValueError(f"expected 64-byte compact ECDSA signature, got {len(compact)}")
+    from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
+
+    r = int.from_bytes(compact[:32], "big")
+    s = int.from_bytes(compact[32:], "big")
+    return encode_dss_signature(r, s)
+
+
 def verify_es256(canonical: bytes, sig: dict[str, Any]) -> VerifyResult:
-    """ES256 verifier per the AP2 PQC v0 ``signatures[].ES256`` shape."""
+    """ES256 verifier — accepts DER or raw key + DER or compact signature.
+
+    The AlgoVoi substrate-author convention accepts every standard ES256
+    public-key encoding (DER-encoded SubjectPublicKeyInfo OR raw uncompressed
+    65-byte SEC1) and every standard ES256 signature encoding (ASN.1 DER OR
+    64-byte compact r||s). This makes the convention producer-symmetric:
+    Python-side (DER) and TypeScript-side (raw + compact) artefacts both
+    verify without translation.
+    """
     try:
-        pub = serialization.load_der_public_key(_b64d(sig["publicKeyDer"]))
-        pub.verify(_b64d(sig["signature_der"]), canonical, ec.ECDSA(hashes.SHA256()))
+        pub = _load_p256_public_key(sig)
+        sig_bytes, fmt = _ecdsa_signature_bytes(sig)
+        if fmt == "compact-64":
+            sig_bytes = _compact_to_der_ecdsa(sig_bytes)
+        pub.verify(sig_bytes, canonical, ec.ECDSA(hashes.SHA256()))
         return VerifyResult(algorithm="ES256", ok=True)
     except InvalidSignature:
         return VerifyResult(algorithm="ES256", ok=False, detail="signature invalid")
