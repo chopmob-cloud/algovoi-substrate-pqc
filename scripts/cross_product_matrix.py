@@ -119,6 +119,18 @@ VERIFIERS = [
     ),
     ("ruby", ["ruby", str(REPO / "verifiers" / "ruby" / "verify.rb"), "{artefact}"]),
     ("php", php_command([str(REPO / "verifiers" / "php" / "verify.php"), "{artefact}"])),
+    (
+        "java",
+        [
+            "java",
+            "-cp",
+            str(REPO / "verifiers" / "java" / "out")
+            + (";" if os.name == "nt" else ":")
+            + str(REPO / "verifiers" / "java" / "lib" / "*"),
+            "Verify",
+            "{artefact}",
+        ],
+    ),
     ("perl", ["perl", str(REPO / "verifiers" / "perl" / "verify.pl"), "{artefact}"]),
 ]
 
@@ -169,6 +181,10 @@ def summarise_verifier_output(name: str, output: str) -> str:
         )
         fail_lines = sum(1 for line in lines if "FAIL" in line)
         return f"{ok_lines}/{ok_lines + fail_lines}"
+    if name == "java":
+        # Java verifier reports PASS/FAIL lines. PQC schemes not present in
+        # the artefact emit SKIP lines, which we exclude from the count.
+        return f"{passes}/{passes + fails}"
     return f"{passes}/{passes + fails}"
 
 

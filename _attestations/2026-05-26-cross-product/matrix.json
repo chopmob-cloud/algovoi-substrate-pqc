@@ -1,6 +1,6 @@
 {
   "attestation_id": "algovoi-substrate-pqc-cross-product-2026-05-26",
-  "generated_at": "2026-05-26T07:11:02Z",
+  "generated_at": "2026-05-26T07:37:38Z",
   "byte_anchor_consensus": {
     "all_producers_agree": true,
     "consensus_sha256": "sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0",
@@ -75,6 +75,11 @@
         "summary": "4/4",
         "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\python.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
       },
+      "java": {
+        "ok": true,
+        "summary": "6/6",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Java verifier (Bouncy Castle) ===\nRuntime: java 17.0.6\nBC version (bcprov): 1.84\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\python.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 (P-256 + SHA-256) verifies\n\n3. Ed25519:\n  PASS  Ed25519 verifies\n\n4. ML-DSA-65 (FIPS 204, Bouncy Castle production):\n  PASS  ML-DSA-65 (FIPS 204, via BC MLDSASigner) verifies\n\n5. Falcon-1024 (FIPS 206, Bouncy Castle EXPERIMENTAL):\n  PASS  Falcon-1024 (FIPS 206, via BC, experimental) verifies\n\n=== Summary ===\nRuntime: java 17.0.6\nBC version: 1.84\nPassed: 6\nFailed: 0"
+      },
       "perl": {
         "ok": true,
         "summary": "JCS 2/2",
@@ -101,6 +106,11 @@
         "ok": true,
         "summary": "4/4",
         "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ts.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n  SKIP  Falcon-1024 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n  SKIP  ML-DSA-65 signature is present in fixture but PQC verification is out of scope for PHP (no audit-grade library). See verifiers/README.md.\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
+      },
+      "java": {
+        "ok": true,
+        "summary": "6/6",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Java verifier (Bouncy Castle) ===\nRuntime: java 17.0.6\nBC version (bcprov): 1.84\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ts.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 (P-256 + SHA-256) verifies\n\n3. Ed25519:\n  PASS  Ed25519 verifies\n\n4. ML-DSA-65 (FIPS 204, Bouncy Castle production):\n  PASS  ML-DSA-65 (FIPS 204, via BC MLDSASigner) verifies\n\n5. Falcon-1024 (FIPS 206, Bouncy Castle EXPERIMENTAL):\n  PASS  Falcon-1024 (FIPS 206, via BC, experimental) verifies\n\n=== Summary ===\nRuntime: java 17.0.6\nBC version: 1.84\nPassed: 6\nFailed: 0"
       },
       "perl": {
         "ok": true,
@@ -129,6 +139,11 @@
         "summary": "4/4",
         "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ruby.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
       },
+      "java": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Java verifier (Bouncy Castle) ===\nRuntime: java 17.0.6\nBC version (bcprov): 1.84\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\ruby.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 (P-256 + SHA-256) verifies\n\n3. Ed25519:\n  PASS  Ed25519 verifies\n\n4. ML-DSA-65 (FIPS 204, Bouncy Castle production):\n  SKIP  ML-DSA-65 not present\n\n5. Falcon-1024 (FIPS 206, Bouncy Castle EXPERIMENTAL):\n  SKIP  Falcon-1024 not present\n\n=== Summary ===\nRuntime: java 17.0.6\nBC version: 1.84\nPassed: 4\nFailed: 0"
+      },
       "perl": {
         "ok": true,
         "summary": "JCS 2/2",
@@ -156,6 +171,11 @@
         "summary": "4/4",
         "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d PHP verifier ===\nRuntime: php 8.4.20\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\php.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 verifies against fixture\n\n3. Ed25519:\n  PASS  Ed25519 verifies against AlgoVoi-side fixture\n\n4. PQC schemes:\n\n=== Summary ===\nRuntime: php 8.4.20\nPassed:  4\nFailed:  0"
       },
+      "java": {
+        "ok": true,
+        "summary": "4/4",
+        "output_tail": "=== algovoi-substrate-pqc \u00e2\u20ac\u201d Java verifier (Bouncy Castle) ===\nRuntime: java 17.0.6\nBC version (bcprov): 1.84\n\nFixture: C:\\algo\\algovoi-substrate-pqc\\_attestations\\2026-05-26-cross-product\\producers\\php.json\n\n1. JCS canonical bytes anchor:\n  PASS  canonical SHA matches published anchor\n  PASS  canonical SHA matches fixture's expected_canonical_sha256\n\n2. ES256 (P-256 + SHA-256):\n  PASS  ES256 (P-256 + SHA-256) verifies\n\n3. Ed25519:\n  PASS  Ed25519 verifies\n\n4. ML-DSA-65 (FIPS 204, Bouncy Castle production):\n  SKIP  ML-DSA-65 not present\n\n5. Falcon-1024 (FIPS 206, Bouncy Castle EXPERIMENTAL):\n  SKIP  Falcon-1024 not present\n\n=== Summary ===\nRuntime: java 17.0.6\nBC version: 1.84\nPassed: 4\nFailed: 0"
+      },
       "perl": {
         "ok": true,
         "summary": "JCS 2/2",
@@ -168,6 +188,7 @@
     "ts",
     "ruby",
     "php",
+    "java",
     "perl"
   ],
   "scope": {

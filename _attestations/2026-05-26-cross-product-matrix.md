@@ -1,7 +1,7 @@
 # AlgoVoi substrate-pqc — cross-product verification matrix (2026-05-26)
 
 **Attestation ID:** `algovoi-substrate-pqc-cross-product-2026-05-26`
-**Generated:** 2026-05-26T07:11:02Z
+**Generated:** 2026-05-26T07:37:38Z
 **Canonical payload:** stable AP2 PaymentMandate exemplar
 **Byte-anchor consensus:** ✅ `sha256:cc8315f7696c65b2a07eb278de0e45c3149319526c8d443c7e38a17de04c28e0`
 
@@ -23,12 +23,12 @@ checks>/<total checks>` per cell.
 
 ## Cross-product matrix
 
-| Producer ↓ \ Verifier → | **python** | **ts** | **ruby** | **php** | **perl** |
-|---|---|---|---|---|---|
-| **python** | ✅ 5/5 | ✅ 5/5 | ✅ 4/4 | ✅ 4/4 | ✅ JCS 2/2 |
-| **ts** | ✅ 5/5 | ✅ 5/5 | ✅ 4/4 | ✅ 4/4 | ✅ JCS 2/2 |
-| **ruby** | ✅ 3/3 | ✅ 3/3 | ✅ 4/4 | ✅ 4/4 | ✅ JCS 2/2 |
-| **php** | ✅ 3/3 | ✅ 3/3 | ✅ 4/4 | ✅ 4/4 | ✅ JCS 2/2 |
+| Producer ↓ \ Verifier → | **python** | **ts** | **ruby** | **php** | **java** | **perl** |
+|---|---|---|---|---|---|---|
+| **python** | ✅ 5/5 | ✅ 5/5 | ✅ 4/4 | ✅ 4/4 | ✅ 6/6 | ✅ JCS 2/2 |
+| **ts** | ✅ 5/5 | ✅ 5/5 | ✅ 4/4 | ✅ 4/4 | ✅ 6/6 | ✅ JCS 2/2 |
+| **ruby** | ✅ 3/3 | ✅ 3/3 | ✅ 4/4 | ✅ 4/4 | ✅ 4/4 | ✅ JCS 2/2 |
+| **php** | ✅ 3/3 | ✅ 3/3 | ✅ 4/4 | ✅ 4/4 | ✅ 4/4 | ✅ JCS 2/2 |
 
 ## Per-producer canonical SHA-256
 

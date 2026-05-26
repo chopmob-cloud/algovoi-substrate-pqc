@@ -2,7 +2,7 @@
     "schema_version": "1.0",
     "artefact_id": "cross-product-v0-php-side",
     "canonicalizer": "php-minimal-jcs/8.x",
-    "published_at": "2026-05-26T07:10:55Z",
+    "published_at": "2026-05-26T07:37:24Z",
     "anchored_to": {
         "thread": "https://github.com/chopmob-cloud/algovoi-substrate-pqc",
         "schema": "AP2 PaymentMandate v0.1 (cross-product exemplar)",
@@ -49,13 +49,13 @@
             "algorithm": "ES256",
             "curve": "P-256",
             "hash": "SHA-256",
-            "publicKeyDer": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEDRWGspxv437i8eQrgPzUqjucUDGv9ww15pTbsfTE1OoxHD3em1cgUJMLGh8ur5JKbUyclwQJoNEE7U8wRri8Cw==",
-            "signature_der": "MEYCIQD9j3GG6r7sgkyyiQF2psEcykqvBt8DhZnXFbKnWIM8PgIhAMHAOGqqv5qdbU3z32zK5QrsK6GJyhjVIwqQLcc64a6L"
+            "publicKeyDer": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEsnAcvfG4ccoZY3AZnHgfgu9loOHRSm8qX4fduxD8rWup2rclDMTetLhPJ0UpwtFZttmaKLVszJZlYP42Tw1NvQ==",
+            "signature_der": "MEYCIQCE9/UwifPCL4E9lwco2YPF37GAuPXJxrJCgaK8fECYRAIhAL+pGtKH7t9dzvANbLla4vQeMN2nh2L9ARE/nll1fT6b"
         },
         "Ed25519": {
             "algorithm": "Ed25519",
-            "publicKey_b64": "FzWeQF1qbWLx6wILnkuCBCinvw04nfOA4slT0RHgVA0=",
-            "signature_b64": "n+CuHkN4RbJRq9/lfrgZhSV6zVYXbgfuaubVrRPo1CLPM6D5XHlyCGUCFznENofu10r4RIx6XFE0hUrnBaIwCw=="
+            "publicKey_b64": "YpniEI8miYX5DoPGaqe9ro3Qw1YqrpgqF/D7PzPHWc4=",
+            "signature_b64": "LAc9dHjbH51XUQl7X1o8pf3JTJT79FpzHHppfTRBQ8pxYgsOVVeP/QJGErIxt0MTB+dZR2QnhKOMXxBFhU2SDw=="
         }
     }
 }

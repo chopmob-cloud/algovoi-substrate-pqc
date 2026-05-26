@@ -16,18 +16,28 @@ the published public keys.
 
 | Language | ES256 | Ed25519 | Falcon-1024 | ML-DSA-65 | Audit-grade source |
 |---|---|---|---|---|---|
+| **Java** | ✓ via Bouncy Castle 1.84 | ✓ via Bouncy Castle `Ed25519Signer` | ✓ via BC `FalconSigner` *(experimental)* | ✓ via BC `MLDSASigner` *(production)* | **Third audit-grade PQC implementation** alongside PQClean + `@noble/post-quantum` |
 | **Ruby** | ✓ via OpenSSL stdlib | ✓ via OpenSSL or `ed25519` gem | — | — | OpenSSL |
 | **PHP** | ✓ via openssl extension | ✓ via sodium extension | — | — | OpenSSL + libsodium |
 | **Perl** | ✓ via Crypt::OpenSSL::ECDSA | ✓ via Crypt::Ed25519 | — | — | OpenSSL |
 | **Lua** | ✓ via lua-openssl | ✓ via lua-openssl | — | — | OpenSSL |
 | **Elixir** | ✓ via :public_key | ✓ via :crypto | — | — | OpenSSL (Erlang/OTP) |
 
-**PQC schemes (Falcon-1024, ML-DSA-65) are out of scope for these
-languages.** No audit-grade PQC libraries exist for Ruby / PHP / Perl /
-Lua / Elixir at this time. The PQC convergence proof is established by
-the Python (`algovoi-substrate-pqc` via `pqcrypto`/PQClean) and TypeScript
-(`@algovoi/substrate-pqc` via `@noble/post-quantum`) implementations, which
-are the two languages with audit-grade PQC support today.
+**PQC schemes (Falcon-1024, ML-DSA-65) are out of scope for the scripting
+languages (Ruby / PHP / Perl / Lua / Elixir).** No audit-grade PQC libraries
+exist for those ecosystems at this time. The PQC convergence proof is
+established by **three** audit-grade implementations across the JVM and
+non-JVM ecosystems:
+
+1. **Python** `algovoi-substrate-pqc` → PQClean reference C via `pqcrypto`
+2. **TypeScript** `@algovoi/substrate-pqc` → Paul Miller's `@noble/post-quantum`
+3. **Java** Bouncy Castle 1.84 — `MLDSASigner` (production) +
+   `FalconSigner` (experimental as classified by BC maintainers)
+
+Three independent audit-grade PQC implementations agreeing byte-for-byte
+against the same canonical anchor — see
+[`../_attestations/2026-05-26-cross-product-matrix.md`](../_attestations/2026-05-26-cross-product-matrix.md)
+for the full 4-producer × 6-verifier matrix.
 
 These scripting-language verifiers extend the substrate-author position
 on the **canonicalisation + classical-signature** dimension. The full
