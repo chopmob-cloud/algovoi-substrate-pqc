@@ -140,6 +140,37 @@ prioritises cross-implementation interop: any valid ECDSA signature is
 accepted. Deployments that need signature-malleability defence should
 post-validate signatures with the strict `lowS: true` policy.
 
+## Conformance to the canonicalisation discipline
+
+This package is the AlgoVoi-authored TypeScript reference implementation of
+the v2 (PQC-aware) canonicalisation discipline at
+[`urn:x402:canonicalisation:jcs-rfc8785-v2`](https://docs.algovoi.co.uk/canonicalisation-substrate-v2),
+the strictly-additive successor to
+[`urn:x402:canonicalisation:jcs-rfc8785-v1`](https://docs.algovoi.co.uk/canonicalisation-substrate).
+The canonicalisation core (RFC 8785 JCS plus schema-normalisation rules) is
+unchanged between v1 and v2; v2 adds the `signature_algorithm` open-enum
+registry and the fail-closed verifier discipline this package implements.
+
+> **IETF Internet-Draft status.** An IETF Internet-Draft formalising
+> `urn:x402:canonicalisation:jcs-rfc8785-v2` under the Independent Submissions
+> stream is **pending** an active IETF list thread (May 2026) on the
+> appropriate scope and use of the Independent Submissions stream for
+> x402-related substrate documentation. The v2 discipline is published on
+> `docs.algovoi.co.uk/canonicalisation-substrate-v2`, in this reference
+> implementation, and in the
+> [Substrate Adopters Registry](https://docs.algovoi.co.uk/adopters)
+> independently of that process.
+
+## Substrate adopters
+
+AlgoVoi is recorded in the [Substrate Adopters Registry](https://docs.algovoi.co.uk/adopters)
+as the substrate author (v1 and v2). Parties anchoring their own services
+or specifications to `canon_version: jcs-rfc8785-v2` are recorded in the
+registry via the [submission process](https://docs.algovoi.co.uk/adopters#how-to-submit-an-adoption-entry).
+AlgoVoi validates submissions against the artefact's canonical bytes and
+adds qualifying entries. v1 adopters retain their registry position; adopting
+v2 adds a separate row pinned to `jcs-rfc8785-v2` rather than replacing the v1 row.
+
 ## License
 
 Apache 2.0.
