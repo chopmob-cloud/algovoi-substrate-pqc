@@ -139,6 +139,25 @@ dependencies (`pqcrypto`, `cryptography`, `rfc8785`).
 - Canonicalisation discipline v1: https://docs.algovoi.co.uk/canonicalisation-substrate (also at IETF datatracker as draft-hopley-x402-canonicalisation-jcs-v1)
 - Canonicalisation discipline v2 (PQC-aware): https://docs.algovoi.co.uk/canonicalisation-substrate-v2 (IETF I-D filing pending IETF list thread on Independent Submissions stream scope)
 
+## Adopters
+
+Parties pinning `canon_version: jcs-rfc8785-v2` in publicly-citable artefacts
+are recorded in the [Substrate Adopters Registry](https://docs.algovoi.co.uk/adopters)
+alongside v1 adopters. Current v2 adopters:
+
+- **AlgoVoi** -- this reference implementation (Python + npm packages
+  published 2026-05-26). Cross-validated byte-for-byte across three
+  audit-grade PQC implementations (PQClean via `pqcrypto`,
+  `@noble/post-quantum`, Bouncy Castle 1.84 with `MLDSASigner`).
+
+To request listing as a v2 adopter, follow the
+[submission process](https://docs.algovoi.co.uk/adopters#how-to-submit-an-adoption-entry).
+AlgoVoi validates submissions against the artefact's canonical bytes and
+adds qualifying entries.
+
+v1 adopters retain their registry position. Adopting v2 adds a separate
+row pinned to `jcs-rfc8785-v2` rather than replacing the v1 row.
+
 ## Co-maintainer policy
 
 Contributors who land a substrate-aligned signature scheme (new family in the
