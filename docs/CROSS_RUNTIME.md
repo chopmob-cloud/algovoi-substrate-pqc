@@ -66,15 +66,16 @@ The convention is verifiable across:
 
 The PQC convergence proof (Falcon-1024 + ML-DSA-65 verifying byte-for-byte
 across two independent implementations) is established by the Python and
-TypeScript implementations, **with PQSafe ([@rayc0](https://github.com/rayc0))
-as the cross-implementor partner on the ML-DSA-65 side**. PQSafe contributed
-the [`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
-ML-DSA-65 signature over the identical canonical bytes per the AP2 #250
-joint conformance fixture, and is named co-maintainer of
+TypeScript implementations. The ML-DSA-65 side of that proof verifies
+against an independent fixture contributed by **PQSafe
+([@rayc0](https://github.com/rayc0))** —
+[`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
+ML-DSA-65 signature over the canonical bytes the AlgoVoi-side fixture
+specifies, per AP2 #250. PQSafe is named co-maintainer of
 [`chopmob-cloud/ap2-pq-conformance`](https://github.com/chopmob-cloud/ap2-pq-conformance)
-per the published policy. The substrate-author position depends on
-independent counterparty contribution to the convergence proof — PQSafe is
-that counterparty.
+(the joint conformance repo) per the published policy. **Credit is scoped
+to that ML-DSA-65 contribution only**; substrate-author work for this
+package is AlgoVoi's.
 
 PQC verification is out of scope for the scripting languages due to PQC
 library maturity in those ecosystems; the patent-redistributor liability

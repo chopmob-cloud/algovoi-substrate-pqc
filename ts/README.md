@@ -53,20 +53,19 @@ primitive is provided through the `@noble/post-quantum` MIT-licensed
 implementation. Any deployment using Falcon-1024 should review the FRAND
 pledge for their use case.
 
-## Cross-implementor partner
+## PQC cross-implementor contribution
 
-**PQSafe ([@rayc0](https://github.com/rayc0))** is the cross-implementor
-partner on the ML-DSA-65 byte-anchor convergence proof per
-[AP2 #250](https://github.com/google-agentic-commerce/AP2/issues/250) and the
-joint conformance fixture at
+The ML-DSA-65 cross-implementor fixture this TypeScript package verifies
+against was contributed by **PQSafe ([@rayc0](https://github.com/rayc0))**
+per [AP2 #250](https://github.com/google-agentic-commerce/AP2/issues/250)
+and the joint conformance fixture at
 [`chopmob-cloud/ap2-pq-conformance`](https://github.com/chopmob-cloud/ap2-pq-conformance).
-PQSafe contributed the
+The contribution scope is the
 [`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
-ML-DSA-65 signature over the identical canonical bytes that the AlgoVoi-side
-fixture signs. This TypeScript package's cross-validation tests verify
-PQSafe's ML-DSA-65 signatures byte-for-byte alongside Python `pqcrypto`-
-produced signatures, demonstrating the substrate-author cross-implementor
-agreement.
+ML-DSA-65 signature over the canonical bytes the AlgoVoi-side fixture signs.
+**Credit is scoped to that ML-DSA-65 contribution only; substrate-author
+work for this package (signature_algorithm convention, JCS+PQC binding
+pattern, fail-closed verifier discipline) is AlgoVoi's.**
 
 ## Cross-implementation interop
 

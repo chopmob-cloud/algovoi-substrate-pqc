@@ -322,39 +322,34 @@ def main() -> int:
 
     body += dedent(
         """\
-        ## Cross-implementor partners
+        ## Upstream attribution
 
-        This convergence proof is a coalition deliverable. Acknowledgements:
+        Substrate-author work (the `signature_algorithm` open-enum
+        convention, the JCS+PQC binding pattern, the fail-closed verifier
+        discipline, the byte-anchor convergence proof methodology, and the
+        multi-language verifier suite) is AlgoVoi's. The matrix's
+        reproducibility depends on the following upstream contributions —
+        credit per upstream is scoped to the specific contribution named:
 
-        - **PQSafe ([@rayc0](https://github.com/rayc0))** — cross-implementor
-          partner on the ML-DSA-65 byte-anchor convergence per the AP2 #250
-          joint conformance fixture. PQSafe's ML-DSA-65 signatures (produced
-          with Python `pqcrypto`/PQClean) are verified by the TypeScript and
-          Java sides of this matrix, providing one of the two independent
-          ML-DSA-65 implementation paths in the cross-implementor proof.
-          Joint conformance home: [`chopmob-cloud/ap2-pq-conformance`](https://github.com/chopmob-cloud/ap2-pq-conformance);
-          PQSafe contributed the [`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
-          half of the joint fixture and is named co-maintainer per the
-          published policy.
+        - **PQSafe ([@rayc0](https://github.com/rayc0))** — ML-DSA-65
+          signature contribution per the AP2 #250 joint conformance
+          fixture: [`pqsafe-side/`](https://github.com/chopmob-cloud/ap2-pq-conformance/tree/main/pqsafe-side)
+          of [`chopmob-cloud/ap2-pq-conformance`](https://github.com/chopmob-cloud/ap2-pq-conformance).
+          Named co-maintainer of that joint conformance repo per the
+          published policy. Credit scoped to that ML-DSA-65 contribution
+          only.
         - **Paul Miller ([@paulmillr](https://github.com/paulmillr))** —
-          `@noble/post-quantum` author, providing the second audit-grade PQC
-          implementation chain on the TypeScript side. Pure-JS Falcon-1024 +
-          ML-DSA-65 in MIT-licensed code.
-        - **PQClean community** — reference C implementations of Falcon-1024
-          and ML-DSA-65, exposed to Python via the
-          [`pqcrypto`](https://pypi.org/project/pqcrypto/) package (Backbone
-          Authors, Apache-2.0).
-        - **Bouncy Castle maintainers** — third audit-grade implementation
-          via `MLDSASigner` (production) and `FalconSigner` (experimental),
-          MIT-style licensed.
-        - **Anders Rundgren** — RFC 8785 JCS canonicalisation rule, the
-          load-bearing canonicalisation discipline this entire proof rests
-          on.
-
-        Without these upstream partners + cross-implementor contributors, the
-        matrix would not be reproducible. Substrate-author credit for the
-        convention + binding pattern + open-enum + fail-closed discipline is
-        AlgoVoi's; cross-implementor agreement is the coalition's.
+          `@noble/post-quantum` author. Pure-JS Falcon-1024 + ML-DSA-65,
+          MIT-licensed. Credit scoped to that library.
+        - **PQClean community** — reference C implementations of
+          Falcon-1024 and ML-DSA-65. Exposed to Python via the
+          [`pqcrypto`](https://pypi.org/project/pqcrypto/) package
+          (Backbone Authors, Apache-2.0). Credit scoped to those primitives.
+        - **Bouncy Castle maintainers** — `MLDSASigner` (production) and
+          `FalconSigner` (experimental), MIT-style licensed. Credit scoped
+          to those Java implementations.
+        - **Anders Rundgren** — RFC 8785 JCS canonicalisation rule. Credit
+          scoped to that canonicalisation algorithm.
 
         ## Substrate-author significance
 
