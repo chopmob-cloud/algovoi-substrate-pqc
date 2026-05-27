@@ -1,3 +1,7 @@
+> **AlgoVoi is available for acquisition** — [docs.algovoi.co.uk/acquisition](https://docs.algovoi.co.uk/acquisition)
+
+---
+
 # algovoi-substrate-pqc
 
 **AlgoVoi substrate-author layer for JCS+PQC integration.**
