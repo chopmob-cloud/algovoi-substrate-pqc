@@ -1,6 +1,6 @@
 {
   "name": "@algovoi/substrate-pqc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AlgoVoi substrate-author layer for JCS+PQC integration: signature_algorithm open-enum + cross-implementor byte-anchor convergence proof. TypeScript companion to algovoi-substrate-pqc on PyPI.",
   "type": "module",
   "main": "./dist/index.cjs",

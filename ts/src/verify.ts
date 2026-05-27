@@ -90,7 +90,15 @@ function safeVerify(algorithm: string, fn: () => boolean): VerifyResult {
   }
 }
 
-export function verifyES256(canonical: Uint8Array, sig: Record<string, unknown>): VerifyResult {
+/**
+ * Internal ES256 verifier — shared by `verifyES256` (interop mode, lowS:false)
+ * and `verifyES256Strict` (malleability-resistant mode, lowS:true).
+ */
+function verifyES256WithOptions(
+  canonical: Uint8Array,
+  sig: Record<string, unknown>,
+  options: { lowS: boolean },
+): VerifyResult {
   return safeVerify('ES256', () => {
     // Public key: prefer raw `publicKey_b64`; fall back to extracting the raw
     // uncompressed point from DER-encoded `publicKeyDer` if present.
@@ -103,29 +111,50 @@ export function verifyES256(canonical: Uint8Array, sig: Record<string, unknown>)
       throw new TypeError('ES256 signature missing publicKey_b64 or publicKeyDer');
     }
 
-    // Signature: prefer compact `signature_b64` / `signature_compact_b64`; fall
-    // back to DER-encoded `signature_der` via the noble {format:'der'} option.
-    //
-    // We pass `lowS: false` for interop. Many ECDSA implementations (notably
-    // Python `cryptography`) emit signatures without restricting `s` to the
-    // lower half of the curve order. The `lowS: true` default in @noble/curves
-    // would reject those even though they're cryptographically valid. The
-    // AlgoVoi-substrate verifier prioritises cross-implementation interop, so
-    // we accept any valid ECDSA signature. Implementations that need
-    // malleability defence can post-validate signatures with `lowS: true`.
     const compactStr =
       (sig['signature_b64'] ?? sig['signature_compact_b64']) as string | undefined;
     const derStr = sig['signature_der'] as string | undefined;
     if (typeof compactStr === 'string') {
-      return p256.verify(b64d(compactStr), canonical, pub, { lowS: false });
+      return p256.verify(b64d(compactStr), canonical, pub, { lowS: options.lowS });
     }
     if (typeof derStr === 'string') {
-      return p256.verify(b64d(derStr), canonical, pub, { format: 'der', lowS: false });
+      return p256.verify(b64d(derStr), canonical, pub, { format: 'der', lowS: options.lowS });
     }
     throw new TypeError(
       'ES256 signature missing signature_b64 / signature_compact_b64 / signature_der',
     );
   });
+}
+
+/**
+ * ES256 verifier — interop mode (`lowS: false`).
+ *
+ * Accepts any valid ECDSA signature regardless of whether `s` is in the lower
+ * half of the curve order. This is required for cross-implementation interop
+ * because many producers (including the Python `cryptography` library) emit
+ * signatures without the `lowS` constraint. Use `verifyES256Strict` when
+ * malleability protection is required (e.g. after a signature has been
+ * accepted into a ledger and must not be re-malleable).
+ */
+export function verifyES256(canonical: Uint8Array, sig: Record<string, unknown>): VerifyResult {
+  return verifyES256WithOptions(canonical, sig, { lowS: false });
+}
+
+/**
+ * ES256 verifier — strict malleability-resistant mode (`lowS: true`).
+ *
+ * Rejects signatures where `s > n/2` (high-s form). Use this when you need
+ * to guarantee that signatures cannot be re-malleated by a third party.
+ * Note that high-s signatures from some producers (including the Python
+ * `cryptography` library on certain platforms) will fail this check even
+ * though they are cryptographically valid — prefer `verifyES256` for
+ * cross-implementation verification.
+ */
+export function verifyES256Strict(
+  canonical: Uint8Array,
+  sig: Record<string, unknown>,
+): VerifyResult {
+  return verifyES256WithOptions(canonical, sig, { lowS: true });
 }
 
 export function verifyEd25519(canonical: Uint8Array, sig: Record<string, unknown>): VerifyResult {
@@ -155,6 +184,10 @@ export function verifyMLDSA65(canonical: Uint8Array, sig: Record<string, unknown
   });
 }
 
+// The VERIFIERS dispatch table uses interop-mode ES256 (lowS:false) so that
+// artefacts produced by any conforming implementation verify cleanly.
+// Callers that need malleability protection should call verifyES256Strict
+// directly, not rely on the artefact-level verifyArtefact dispatch.
 const VERIFIERS: Record<string, (c: Uint8Array, s: Record<string, unknown>) => VerifyResult> = {
   ES256: verifyES256,
   Ed25519: verifyEd25519,
@@ -220,6 +253,9 @@ export function verifyArtefact(artefact: Artefact): ArtefactVerifyResult {
     canonicalShaRecomputed: recomputed,
     canonicalShaExpected: expected,
     signatures,
-    ok: canonicalShaOk && signatures.every((s) => s.ok),
+    // An artefact with zero declared signatures is never valid.
+    // `[].every(...)` vacuously returns true — the fail-closed substrate rule
+    // requires an explicit positive signal from at least one verified scheme.
+    ok: canonicalShaOk && signatures.length > 0 && signatures.every((s) => s.ok),
   };
 }

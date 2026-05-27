@@ -40,3 +40,7 @@ Thumbs.db
 keys.txt
 .env
 .env.local
+
+# _attestations/ is intentionally tracked in git — it contains
+# cross-implementor byte-anchor convergence attestation documents
+# (plain-text .md, no secrets). Do NOT add it here.

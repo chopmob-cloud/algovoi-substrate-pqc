@@ -40,6 +40,11 @@ def sign_es256(payload: Any, secret_key: ec.EllipticCurvePrivateKey) -> dict[str
     """
     lookup_signature_algorithm("ES256")  # registry validation
     canonical = jcs_canonical_bytes(payload)
+    # ``cryptography`` delegates ECDSA signing to the OpenSSL backend (required
+    # >= 1.1.1 by ``cryptography >= 42``). OpenSSL 3.x uses RFC 6979
+    # deterministic nonces for ECDSA by default, so the signature is
+    # deterministic on all supported platforms. There is no separate
+    # ``deterministic_signing`` API knob in this library version.
     signature_der = secret_key.sign(canonical, ec.ECDSA(hashes.SHA256()))
     pub_der = secret_key.public_key().public_bytes(
         encoding=serialization.Encoding.DER,

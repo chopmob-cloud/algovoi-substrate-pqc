@@ -199,6 +199,17 @@ public class Verify {
         byte[] sEnc = new byte[s.length + 2]; sEnc[0] = 0x02; sEnc[1] = (byte) s.length;
         System.arraycopy(s, 0, sEnc, 2, s.length);
         byte[] body = concat(rEnc, sEnc);
+        // The SEQUENCE body for a P-256 r||s is at most 2+33+2+33 = 70 bytes,
+        // well within the single-byte ASN.1 length encoding range (≤ 0x7F).
+        // This assumption is safe for P-256 but would need multi-byte length
+        // encoding for larger curves (e.g. P-521). Checked explicitly below
+        // to fail loudly rather than silently produce malformed DER.
+        if (body.length > 0x7F) {
+            throw new RuntimeException(
+                "compactToDerEcdsa: SEQUENCE body length " + body.length
+                + " exceeds single-byte encoding limit (not a P-256 signature)"
+            );
+        }
         byte[] der = new byte[body.length + 2]; der[0] = 0x30; der[1] = (byte) body.length;
         System.arraycopy(body, 0, der, 2, body.length);
         return der;

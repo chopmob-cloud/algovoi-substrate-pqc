@@ -25,7 +25,7 @@
  * Falcon-1024 patent disclosure (US7308097B2 with FRAND pledge).
  */
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.2';
 
 // registry
 export {
@@ -58,6 +58,7 @@ export {
 // verify
 export {
   verifyES256,
+  verifyES256Strict,
   verifyEd25519,
   verifyFalcon1024,
   verifyMLDSA65,

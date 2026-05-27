@@ -22,7 +22,7 @@ Underlying primitives (we depend on, do not claim authorship):
 See README.md for the full attribution table.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 
 from .canonical import jcs_canonical_bytes, jcs_canonical_sha256_hex
 from .proof import CanonicalAnchor, build_convergence_artefact

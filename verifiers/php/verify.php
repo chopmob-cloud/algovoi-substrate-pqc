@@ -59,6 +59,13 @@ function jcs($value): string {
     throw new RuntimeException('JCS: unsupported value type ' . gettype($value));
 }
 
+/**
+ * Minimal RFC 8259 string escape for JCS. This implementation uses
+ * byte-by-byte iteration via strlen/ord and is therefore valid only for
+ * ASCII-range string values (codepoints U+0000–U+007F). The AP2
+ * PaymentMandate payload uses ASCII-only field values; multi-byte UTF-8
+ * strings would require mb_string-aware processing.
+ */
 function jsonEscape(string $s): string {
     $out = '"';
     $len = strlen($s);

@@ -11,6 +11,10 @@ This module provides the AlgoVoi-substrate verifier discipline:
 4. Dispatch to the per-scheme verifier (ES256, Ed25519, Falcon-1024, ML-DSA-65)
    over the recomputed canonical bytes.
 
+**Payload size limits**: This module does not enforce a maximum payload size.
+Callers should apply their own size cap before invoking :func:`verify_artefact`
+to prevent excessive memory or CPU use from pathologically large payloads.
+
 The cryptographic primitives are not AlgoVoi-authored. See the README for the
 upstream-attribution table.
 """
@@ -63,8 +67,14 @@ class ArtefactVerifyResult:
 
     @property
     def ok(self) -> bool:
-        """``True`` iff canonical SHA matches AND all known-scheme verifications pass."""
-        return self.canonical_sha_ok and all(s.ok for s in self.signatures)
+        """``True`` iff canonical SHA matches AND at least one signature is present AND all pass.
+
+        An artefact with zero declared signatures is *never* considered valid.
+        ``all([])`` would otherwise vacuously return ``True`` — the fail-closed
+        substrate rule requires an explicit positive signal from at least one
+        verified scheme.
+        """
+        return self.canonical_sha_ok and bool(self.signatures) and all(s.ok for s in self.signatures)
 
 
 def _load_p256_public_key(sig: dict[str, Any]):
@@ -225,28 +235,44 @@ def verify_signature(
     return verifier(canonical, sig)
 
 
+_MISSING = object()
+
+
 def verify_artefact(artefact: dict[str, Any]) -> ArtefactVerifyResult:
     """Verify an AP2 PQC v0 artefact end-to-end.
 
     Steps:
 
-    1. Recompute JCS canonical bytes from ``artefact["mandate_body"]``.
+    1. Recompute JCS canonical bytes from ``artefact["mandate_body"]`` (or
+       ``artefact["payload"]`` as a fallback — both keys are accepted so that
+       producers using either convention verify cleanly).
     2. Confirm the recomputed SHA-256 matches ``artefact["expected_canonical_sha256"]``.
     3. For each declared signature, dispatch the per-scheme verifier.
        Unknown identifiers cause :class:`UnknownSignatureAlgorithm` to be
        raised — this is the fail-closed substrate rule.
 
+    Raises :exc:`ValueError` if neither ``mandate_body`` nor ``payload`` is
+    present, or if ``expected_canonical_sha256`` is absent.
+
     Returns :class:`ArtefactVerifyResult` carrying the canonical-bytes check
     plus the per-signature outcomes.
     """
-    payload = artefact["mandate_body"]
+    payload = artefact.get("mandate_body", _MISSING)
+    if payload is _MISSING:
+        payload = artefact.get("payload", _MISSING)
+    if payload is _MISSING:
+        raise ValueError("artefact must declare either 'mandate_body' or 'payload'")
+
+    expected_sha = artefact.get("expected_canonical_sha256", _MISSING)
+    if expected_sha is _MISSING:
+        raise ValueError("artefact is missing required field 'expected_canonical_sha256'")
+
     canonical = jcs_canonical_bytes(payload)
     recomputed_sha = "sha256:" + hashlib.sha256(canonical).hexdigest()
-    expected_sha = artefact["expected_canonical_sha256"]
     sha_ok = recomputed_sha == expected_sha
 
     results: list[VerifyResult] = []
-    for algorithm, sig in artefact.get("signatures", {}).items():
+    for algorithm, sig in artefact.get("signatures", {}).items():  # type: ignore[union-attr]
         results.append(verify_signature(canonical, algorithm, sig))
 
     return ArtefactVerifyResult(
