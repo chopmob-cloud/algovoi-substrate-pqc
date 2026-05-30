@@ -128,6 +128,17 @@ escalate to a registered extension, rather than guessing.
 The Python implementation surfaces this rule as
 `UnknownSignatureAlgorithm` raised from `lookup_signature_algorithm()`.
 
+## Tests
+
+```bash
+# Python (34 tests)
+pip install -e .[dev]
+python -m pytest tests/ -v
+
+# TypeScript (33 tests)
+cd ts && npm install && npm test
+```
+
 ## License
 
 Apache 2.0.
