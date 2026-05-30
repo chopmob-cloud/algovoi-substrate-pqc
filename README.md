@@ -161,9 +161,10 @@ are recorded in the [Substrate Adopters Registry](https://docs.algovoi.co.uk/ado
 alongside v1 adopters. Current v2 adopters:
 
 - **AlgoVoi** -- this reference implementation (Python + npm packages
-  published 2026-05-26). Cross-validated byte-for-byte across three
+  published 2026-05-26). Cross-validated byte-for-byte across four
   audit-grade PQC implementations (PQClean via `pqcrypto`,
-  `@noble/post-quantum`, Bouncy Castle 1.84 with `MLDSASigner`).
+  `@noble/post-quantum`, Bouncy Castle 1.84, RustCrypto `ml-dsa` +
+  `pqcrypto-falcon`). 48/48 cells PASS across 6 producers × 8 verifiers.
 
 To request listing as a v2 adopter, follow the
 [submission process](https://docs.algovoi.co.uk/adopters#how-to-submit-an-adoption-entry).
@@ -191,10 +192,11 @@ makes the cross-implementor convergence proof empirically possible:
 - [PQClean](https://github.com/PQClean/PQClean) (via [`pqcrypto`](https://pypi.org/project/pqcrypto/)) -- PQClean community + Backbone Authors
 - [`@noble/post-quantum`](https://github.com/paulmillr/noble-post-quantum) -- Paul Miller
 - [Bouncy Castle](https://www.bouncycastle.org/) 1.84 (`MLDSASigner` for FIPS 204 final; experimental `FalconSigner`) -- Bouncy Castle community
+- [`pqcrypto-falcon`](https://crates.io/crates/pqcrypto-falcon) + [`ml-dsa`](https://crates.io/crates/ml-dsa) (Rust) -- PQClean C wrapper (Falcon) + RustCrypto FIPS 204
 
-The three audit-grade PQC implementations agree byte-for-byte across the
-24-cell producer × verifier matrix. The substrate-author position rests on
-this independent multi-author cross-validation, not on AlgoVoi self-claim.
+The four audit-grade PQC implementations agree byte-for-byte across the
+48-cell (6-producer × 8-verifier) matrix. The substrate-author position rests
+on this independent multi-author cross-validation, not on AlgoVoi self-claim.
 
 **Classical primitives and JCS library wrapped:**
 
