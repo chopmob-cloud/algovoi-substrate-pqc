@@ -6,7 +6,7 @@
  * canonical payload. Mirror of `scripts/produce.py`.
  *
  * Output:
- *   _attestations/2026-05-26-cross-product/producers/ts.json
+ *   _attestations/2026-05-30-cross-product/producers/ts.json
  *
  * Usage:
  *   node scripts/produce.mjs              # default path
@@ -57,7 +57,7 @@ const defaultOut = resolve(
   '..',
   '..',
   '_attestations',
-  '2026-05-26-cross-product',
+  '2026-05-30-cross-product',
   'producers',
   'ts.json',
 );

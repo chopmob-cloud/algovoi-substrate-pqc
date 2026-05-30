@@ -94,7 +94,7 @@ if __name__ == "__main__":
     default_out = (
         Path(__file__).resolve().parents[1]
         / "_attestations"
-        / "2026-05-26-cross-product"
+        / "2026-05-30-cross-product"
         / "producers"
         / "python.json"
     )

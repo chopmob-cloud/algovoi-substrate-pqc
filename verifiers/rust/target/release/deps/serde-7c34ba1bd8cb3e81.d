@@ -1,0 +1,14 @@
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\serde-7c34ba1bd8cb3e81.d: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\build\serde-f9acb8dec40aa5cf\out/private.rs
+
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\libserde-7c34ba1bd8cb3e81.rlib: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\build\serde-f9acb8dec40aa5cf\out/private.rs
+
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\libserde-7c34ba1bd8cb3e81.rmeta: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\build\serde-f9acb8dec40aa5cf\out/private.rs
+
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs:
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\build\serde-f9acb8dec40aa5cf\out/private.rs:
+
+# env-dep:OUT_DIR=C:\\algo\\algovoi-substrate-pqc\\verifiers\\rust\\target\\release\\build\\serde-f9acb8dec40aa5cf\\out

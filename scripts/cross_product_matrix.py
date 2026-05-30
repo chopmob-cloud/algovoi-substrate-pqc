@@ -37,7 +37,7 @@ from pathlib import Path
 from textwrap import dedent
 
 REPO = Path(__file__).resolve().parents[1]
-ATTEST = REPO / "_attestations" / "2026-05-26-cross-product"
+ATTEST = REPO / "_attestations" / "2026-05-30-cross-product"
 PRODUCERS_DIR = ATTEST / "producers"
 
 
@@ -80,9 +80,12 @@ def php_command(args: list[str]) -> list[str]:
         pass
     return cmd + args
 
-DATE = "2026-05-26"
+DATE = "2026-05-30"
 ATTEST_MD = REPO / "_attestations" / f"{DATE}-cross-product-matrix.md"
 ATTEST_JSON = ATTEST / "matrix.json"
+
+# Rust binary path (pre-built with cargo build --release).
+RUST_BIN = REPO / "verifiers" / "rust" / "target" / "release" / "algovoi-pqc-rust.exe"
 
 # Producers: (name, runner-args). Each writes producers/<name>.json
 PRODUCERS = [
@@ -90,6 +93,20 @@ PRODUCERS = [
     ("ts", ["node", str(REPO / "ts" / "scripts" / "produce.mjs")]),
     ("ruby", ["ruby", str(REPO / "verifiers" / "ruby" / "produce.rb")]),
     ("php", php_command([str(REPO / "verifiers" / "php" / "produce.php")])),
+    # Go producer: run from verifiers/go/ so go.mod is picked up; output path
+    # is passed explicitly so it lands in the 2026-05-30 producers directory.
+    (
+        "go",
+        [
+            "go", "run", str(REPO / "verifiers" / "go" / "produce.go"),
+            str(PRODUCERS_DIR / "go.json"),
+        ],
+    ),
+    # Rust producer: binary pre-built; write to the producers directory.
+    (
+        "rust",
+        [str(RUST_BIN), "produce", str(PRODUCERS_DIR / "rust.json")],
+    ),
 ]
 
 # Verifiers: (name, command-template). {artefact} is replaced with the artefact
@@ -132,14 +149,35 @@ VERIFIERS = [
         ],
     ),
     ("perl", ["perl", str(REPO / "verifiers" / "perl" / "verify.pl"), "{artefact}"]),
+    # Go verifier: run from verifiers/go/ so go.mod is found.
+    (
+        "go",
+        ["go", "run", str(REPO / "verifiers" / "go" / "verify" / "verify.go"), "{artefact}"],
+    ),
+    # Rust verifier: pre-built binary.
+    ("rust", [str(RUST_BIN), "verify", "{artefact}"]),
 ]
+
+
+def _cwd_for(name: str) -> Path:
+    """Return the working directory for a given producer/verifier name.
+
+    Go commands must be invoked from the verifiers/go/ directory so that
+    ``go run`` can find the go.mod file. All other producers/verifiers run
+    from the repo root.
+    """
+    if name == "go":
+        return REPO / "verifiers" / "go"
+    return REPO
 
 
 def run_producer(name: str, cmd: list[str]) -> tuple[bool, str]:
     """Run one producer; return (ok, stdout-tail)."""
     print(f"[produce] {name}: {' '.join(cmd)}")
     try:
-        out = subprocess.run(cmd, capture_output=True, text=True, cwd=REPO, timeout=120)
+        out = subprocess.run(
+            cmd, capture_output=True, text=True, cwd=_cwd_for(name), timeout=180
+        )
     except subprocess.TimeoutExpired:
         return False, "timeout"
     if out.returncode != 0:
@@ -153,7 +191,9 @@ def run_verifier(
     """Run one verifier against one artefact; return (ok, output-tail)."""
     cmd = [str(artefact_path) if a == "{artefact}" else a for a in cmd_template]
     try:
-        out = subprocess.run(cmd, capture_output=True, text=True, cwd=REPO, timeout=120)
+        out = subprocess.run(
+            cmd, capture_output=True, text=True, cwd=_cwd_for(name), timeout=180
+        )
     except subprocess.TimeoutExpired:
         return False, "timeout"
     output = (out.stdout + "\n" + out.stderr).strip()
@@ -184,6 +224,14 @@ def summarise_verifier_output(name: str, output: str) -> str:
     if name == "java":
         # Java verifier reports PASS/FAIL lines. PQC schemes not present in
         # the artefact emit SKIP lines, which we exclude from the count.
+        return f"{passes}/{passes + fails}"
+    if name == "go":
+        # Go verifier prints PASS: <scheme> / FAIL: <scheme>: <reason> / SKIP: <scheme>
+        # and canonical_sha_ok=true|false. Count PASS lines, FAIL lines.
+        return f"{passes}/{passes + fails}"
+    if name == "rust":
+        # Rust verifier prints PASS: <scheme> / FAIL: <scheme>: <reason>
+        # and canonical_sha_ok=true|false.
         return f"{passes}/{passes + fails}"
     return f"{passes}/{passes + fails}"
 
@@ -251,9 +299,10 @@ def main() -> int:
         "scope": {
             "schemes_with_full_pqc": ["ES256", "Ed25519", "Falcon-1024", "ML-DSA-65"],
             "schemes_classical_only": ["ES256", "Ed25519"],
-            "pqc_producers": ["python", "ts"],
-            "classical_producers": ["python", "ts", "ruby", "php"],
-            "all_verifiers": ["python", "ts", "ruby", "php", "perl"],
+            "pqc_producers": ["python", "ts", "rust"],
+            "classical_producers": ["python", "ts", "ruby", "php", "go", "rust"],
+            "go_producer_pqc": ["ML-DSA-65"],
+            "all_verifiers": ["python", "ts", "ruby", "php", "java", "perl", "go", "rust"],
         },
     }
     ATTEST_JSON.write_text(json.dumps(summary_json, indent=2) + "\n", encoding="utf-8")

@@ -1,0 +1,10 @@
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\rustcrypto_group-bfae1a91f0f675b5.d: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\cofactor.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\prime.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\wnaf.rs
+
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\librustcrypto_group-bfae1a91f0f675b5.rlib: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\cofactor.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\prime.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\wnaf.rs
+
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\librustcrypto_group-bfae1a91f0f675b5.rmeta: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\cofactor.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\prime.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\wnaf.rs
+
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\lib.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\cofactor.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\prime.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustcrypto-group-0.14.0-rc.1\src\wnaf.rs:

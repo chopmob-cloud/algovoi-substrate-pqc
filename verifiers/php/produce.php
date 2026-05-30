@@ -6,7 +6,7 @@ declare(strict_types=1);
  *
  * Generates a fresh AP2 PQC v0 artefact signed with ES256 + Ed25519 over the
  * cross-product canonical payload. Output goes to
- * `_attestations/2026-05-26-cross-product/producers/php.json`.
+ * `_attestations/2026-05-30-cross-product/producers/php.json`.
  *
  * Falcon-1024 + ML-DSA-65 are out of scope for PHP (no audit-grade library).
  *
@@ -154,7 +154,7 @@ $artefact = [
 ];
 
 $default_out = realpath(__DIR__ . '/../..') .
-    '/_attestations/2026-05-26-cross-product/producers/php.json';
+    '/_attestations/2026-05-30-cross-product/producers/php.json';
 $out_path = $argv[1] ?? $default_out;
 @mkdir(dirname($out_path), 0755, true);
 file_put_contents(

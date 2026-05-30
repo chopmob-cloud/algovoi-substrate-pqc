@@ -1,0 +1,1 @@
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\algovoi-pqc-rust.exe: C:\algo\algovoi-substrate-pqc\verifiers\rust\src\main.rs C:\algo\algovoi-substrate-pqc\verifiers\rust\src\produce.rs C:\algo\algovoi-substrate-pqc\verifiers\rust\src\verify.rs

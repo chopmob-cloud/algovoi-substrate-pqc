@@ -1,0 +1,12 @@
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\spki-fea74e7b3be3c5fa.d: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\algorithm.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\error.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\spki.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\traits.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\../README.md
+
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\libspki-fea74e7b3be3c5fa.rlib: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\algorithm.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\error.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\spki.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\traits.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\../README.md
+
+C:\algo\algovoi-substrate-pqc\verifiers\rust\target\release\deps\libspki-fea74e7b3be3c5fa.rmeta: C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\lib.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\algorithm.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\error.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\spki.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\traits.rs C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\../README.md
+
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\lib.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\algorithm.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\error.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\spki.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\traits.rs:
+C:\Users\ETCMC\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\spki-0.8.0\src\../README.md:

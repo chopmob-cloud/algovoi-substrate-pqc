@@ -131,7 +131,7 @@ artefact = {
 }
 
 default_out = File.expand_path(
-  '../../_attestations/2026-05-26-cross-product/producers/ruby.json', __dir__
+  '../../_attestations/2026-05-30-cross-product/producers/ruby.json', __dir__
 )
 out_path = ARGV[0] || default_out
 FileUtils.mkdir_p(File.dirname(out_path))
