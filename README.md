@@ -4,6 +4,11 @@
 
 # algovoi-substrate-pqc
 
+[![PyPI](https://img.shields.io/pypi/v/algovoi-substrate-pqc?label=PyPI)](https://pypi.org/project/algovoi-substrate-pqc/)
+[![npm](https://img.shields.io/npm/v/@algovoi/substrate-pqc?label=npm)](https://www.npmjs.com/package/@algovoi/substrate-pqc)
+[![Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green)](./LICENSE)
+[![IETF I-D](https://img.shields.io/badge/companion%20IETF%20I--D-draft--hopley--x402--canonicalisation--jcs--v1-blue)](https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/)
+
 **AlgoVoi substrate-author layer for JCS+PQC integration.**
 
 This package implements the AlgoVoi-authored substrate convention for binding
