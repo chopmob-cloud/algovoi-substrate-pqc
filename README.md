@@ -226,3 +226,14 @@ they contribute.
 
 This policy mirrors the `chopmob-cloud/ap2-pq-conformance` policy under which
 PQSafe (rayc0) joined as co-maintainer with the ML-DSA-65 contribution.
+## Attribution
+
+This package is Apache-2.0. Use it freely and build whatever you are building on top of it. The only ask is the one the licence already makes: keep the NOTICE, and name who authored the substrate. To attribute it in your own product, add this to your NOTICE file:
+
+```
+This product includes the AlgoVoi substrate,
+authored by Christopher Hopley / AlgoVoi (chopmob-cloud), Apache-2.0.
+https://docs.algovoi.co.uk/canonicalisation-substrate
+```
+
+The full invitation is at https://docs.algovoi.co.uk/canonicalisation-substrate#adopt-the-substrate
